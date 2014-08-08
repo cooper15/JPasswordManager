@@ -1,6 +1,6 @@
 JavaProj
 ========
-Este repositorio tiene como propósito principal almacenar mis aplicaciones creadas en Java, mismas que estarán enfocadas a principiantes en programación, si alguien lee esto y siente el deseo de colaborar escribiendo código o subiendo sus propias aplicaciones, sientase libre de hacerlo...
+Aplicación hecha para gestionar contraseñas, utiliza una conexión MySql, la idea es ver diferentes elementos de la conexión con ese gestor de base de datos.
 
 Para contactos v.centeno15@gmail.com
 
