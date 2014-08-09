@@ -1,6 +1,8 @@
 
 package ui;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author cooper15
@@ -132,20 +134,20 @@ public class AgregarPass extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntAceptarPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAceptarPassActionPerformed
-        if (validaDatos()){
+        if (!validaDatos()){
             // llama codigo para insersión..
             
         }
-          System.out.println("Datos vacios");  
+          JOptionPane.showMessageDialog(this,"Existen datos vacíos, por favor rellene el formulario completo","Atención",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_bntAceptarPassActionPerformed
     
     private boolean validaDatos(){
-        boolean vacio = true;
+        boolean vacio = false;
         
            if (txtContrasena.getText().equals("") || txtRepitaContrasena.getText().equals("")
                 || txtNombreSitio.getText().equals("")  || txtUrlSitio.getText().equals("")
                 || txtFechaVencimiento.getText().equals(""))
-               vacio = false;
+               vacio = true;
            
         return vacio;
     }

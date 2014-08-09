@@ -87,6 +87,11 @@ public class Principal extends javax.swing.JFrame {
         jmArchivo.setText("Archivo");
 
         jmiNuevoUsuario.setText("Nuevo Usuario");
+        jmiNuevoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNuevoUsuarioActionPerformed(evt);
+            }
+        });
         jmArchivo.add(jmiNuevoUsuario);
 
         jmiEliminarUsuario.setText("Eliminar Usuario");
@@ -141,6 +146,11 @@ public class Principal extends javax.swing.JFrame {
         AgregarPass dialogAgregar = new AgregarPass(this, true);
         dialogAgregar.setVisible(true);
     }//GEN-LAST:event_bntNuevoPassActionPerformed
+
+    private void jmiNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoUsuarioActionPerformed
+        AgregarUsuario dialogNewUsuario = new AgregarUsuario(this,true);
+        dialogNewUsuario.setVisible(true);
+    }//GEN-LAST:event_jmiNuevoUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
