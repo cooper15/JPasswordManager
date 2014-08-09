@@ -7,6 +7,7 @@
 package ui;
 
 import Conexiones.InterfazConexion;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Login extends javax.swing.JDialog {
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
     }
 
@@ -91,13 +93,22 @@ public class Login extends javax.swing.JDialog {
     private void bntAceptarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAceptarLoginActionPerformed
         InterfazConexion interfaz = new InterfazConexion();
         String Resultado = interfaz.ObtieneDatosUsuario(jtUsuarioLogin.getText(), jtContrasenaLogin.getText());
-            if (Resultado.contains(jtUsuarioLogin.getText()) && Resultado.contains(jtContrasenaLogin.getText())){
-                Principal principal = new Principal();
-                principal.setVisible(true);
-                this.dispose();
-            }
-            else
-                lblErrorLogin.setText("Usuario o Contraseña invalidos");
+          if(!jtUsuarioLogin.getText().equals("") && !jtContrasenaLogin.getText().equals(""))  {
+            
+              if (Resultado.contains(jtUsuarioLogin.getText()) && Resultado.contains(jtContrasenaLogin.getText())){
+                    Principal principal = new Principal();
+                    principal.setVisible(true);
+                 this.dispose();
+                }
+              else{
+                  lblErrorLogin.setText("Usuario o Contraseña invalidos");
+                  jtUsuarioLogin.setText("");
+                  jtContrasenaLogin.setText("");
+              }
+                
+          }
+          else JOptionPane.showMessageDialog(null,"Rellene los campos en blanco","Error!", JOptionPane.ERROR_MESSAGE);
+     
 
     }//GEN-LAST:event_bntAceptarLoginActionPerformed
 
