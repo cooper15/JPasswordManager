@@ -6,6 +6,8 @@
 
 package ui;
 
+import Conexiones.InterfazConexion;
+
 /**
  *
  * @author cooper15
@@ -139,7 +141,10 @@ public class AgregarUsuario extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // validar datos
         if(!validaDatos()){
-        
+            String datosObtenidos = "'"+jtNombreUsuario+"'"+","+"'"+jtContrasena+"'"; 
+            InterfazConexion conectar = new InterfazConexion();
+            conectar.ingresarDatosUsuario(datosObtenidos);
+            
         }
     }//GEN-LAST:event_jButton2ActionPerformed
     
