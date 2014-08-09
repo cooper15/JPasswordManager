@@ -38,4 +38,20 @@ public class Conexion {
         catch(SQLException e){}
         
     }
+    
+    protected ResultSet obtieneUsuarioPass(String usuario, String password){
+        java.sql.Connection conexion= conectar();
+        ResultSet resultado = null;
+        try {
+            if (conexion != null){
+              Statement estado = conexion.createStatement(); 
+                resultado  = estado.executeQuery ( "Call obtiene_Usuario_pass("+ "'"+usuario+"'"+","+"'"+password+"'" +")"  );
+            }
+           
+        }
+        catch(SQLException e){
+        }
+        return resultado;
+    }
+    
 }
