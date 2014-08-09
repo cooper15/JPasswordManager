@@ -40,8 +40,8 @@ public class AgregarUsuario extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jtContrasena = new javax.swing.JTextField();
         jtRepitaContrasena = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        bntAgregarUsuari = new javax.swing.JButton();
+        bntCancelarUsuario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Usuario");
@@ -59,14 +59,14 @@ public class AgregarUsuario extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("Agregar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        bntAgregarUsuari.setText("Agregar");
+        bntAgregarUsuari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bntAgregarUsuariActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Cancelar");
+        bntCancelarUsuario.setText("Cancelar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,9 +87,9 @@ public class AgregarUsuario extends javax.swing.JDialog {
                             .addComponent(jtRepitaContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(bntAgregarUsuari)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)))
+                        .addComponent(bntCancelarUsuario)))
                 .addGap(12, 12, 12))
         );
         jPanel1Layout.setVerticalGroup(
@@ -109,8 +109,8 @@ public class AgregarUsuario extends javax.swing.JDialog {
                     .addComponent(jtRepitaContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(bntAgregarUsuari)
+                    .addComponent(bntCancelarUsuario))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -138,20 +138,20 @@ public class AgregarUsuario extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtContrasenaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void bntAgregarUsuariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAgregarUsuariActionPerformed
         // validar datos
         if(!validaDatos()){
-            String datosObtenidos = "'"+jtNombreUsuario+"'"+","+"'"+jtContrasena+"'"; 
+            String datosObtenidos = "'"+jtNombreUsuario.getText()+"'"+","+"'"+jtContrasena.getText()+"'"; 
             InterfazConexion conectar = new InterfazConexion();
             conectar.ingresarDatosUsuario(datosObtenidos);
             
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_bntAgregarUsuariActionPerformed
     
     private boolean validaDatos(){
-        boolean vacio = true;
+        boolean vacio = false;
             if (jtContrasena.getText().equals("") | jtNombreUsuario.getText().equals("") | jtRepitaContrasena.getText().equals(""))
-                return vacio;
+                return true;
         return vacio;
     }
     /**
@@ -197,8 +197,8 @@ public class AgregarUsuario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton bntAgregarUsuari;
+    private javax.swing.JButton bntCancelarUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
