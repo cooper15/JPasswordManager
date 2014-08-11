@@ -30,4 +30,10 @@ public class InterfazConexion {
             }
         return datos;
     }
+    
+    public void ingresaPassword(String datos){
+        Conexion conexionDatos = new Conexion();
+        conexionDatos.insertarPassword(datos);
+    }
 }
+    

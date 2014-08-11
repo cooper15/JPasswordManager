@@ -97,6 +97,7 @@ public class Login extends javax.swing.JDialog {
             
               if (Resultado.contains(jtUsuarioLogin.getText()) && Resultado.contains(jtContrasenaLogin.getText())){
                     Principal principal = new Principal();
+                    principal.setNombreUsuario(jtUsuarioLogin.getText());
                     principal.setVisible(true);
                  this.dispose();
                 }

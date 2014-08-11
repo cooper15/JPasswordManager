@@ -11,7 +11,7 @@ package ui;
  * @author cooper15
  */
 public class Principal extends javax.swing.JFrame {
-
+     String  nombreUsuario;
     /**
      * Creates new form Principal
      */
@@ -144,6 +144,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void bntNuevoPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntNuevoPassActionPerformed
         AgregarPass dialogAgregar = new AgregarPass(this, true);
+        dialogAgregar.setNombreUsuario(nombreUsuario);
         dialogAgregar.setVisible(true);
     }//GEN-LAST:event_bntNuevoPassActionPerformed
 
@@ -151,10 +152,10 @@ public class Principal extends javax.swing.JFrame {
         AgregarUsuario dialogNewUsuario = new AgregarUsuario(this,true);
         dialogNewUsuario.setVisible(true);
     }//GEN-LAST:event_jmiNuevoUsuarioActionPerformed
+    public void setNombreUsuario( String nombreUsuario){
+        this.nombreUsuario = nombreUsuario;
+    }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

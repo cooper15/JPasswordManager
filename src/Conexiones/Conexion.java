@@ -1,7 +1,6 @@
 
 package Conexiones;
 
-import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,12 +29,13 @@ public class Conexion {
         java.sql.Connection conexion= conectar();
         try {
             if (conexion != null){
-             Statement estado = conexion.createStatement(); 
-              estado.executeQuery ("Call agregarUsuario("+datos+")");
+               Statement estado = conexion.createStatement(); 
+               estado.executeQuery ("Call agregarUsuario("+datos+")");
             }
            
         }
-        catch(SQLException e){}
+        catch(SQLException e){
+        }
         
     }
     
@@ -44,7 +44,7 @@ public class Conexion {
         ResultSet resultado = null;
         try {
             if (conexion != null){
-              Statement estado = conexion.createStatement(); 
+                Statement estado = conexion.createStatement(); 
                 resultado  = estado.executeQuery ( "Call obtiene_Usuario_pass("+ "'"+usuario+"'"+","+"'"+password+"'" +")"  );
             }
            
@@ -52,6 +52,20 @@ public class Conexion {
         catch(SQLException e){
         }
         return resultado;
+    }
+    
+    protected void insertarPassword(String datos){
+        java.sql.Connection conexion= conectar();
+        try {
+            if (conexion != null){
+                Statement estado = conexion.createStatement(); 
+                estado.executeQuery ("Call agregarPassword("+datos+")");
+            }
+           
+        }
+        catch(SQLException e){
+        }
+    
     }
     
 }

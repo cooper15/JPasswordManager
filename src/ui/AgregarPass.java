@@ -1,6 +1,7 @@
 
 package ui;
 
+import Conexiones.InterfazConexion;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,6 +13,7 @@ public class AgregarPass extends javax.swing.JDialog {
     /**
      * Creates new form AgregarPass
      */
+    String nombreUsuario;
     public AgregarPass(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -27,7 +29,6 @@ public class AgregarPass extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jpFormulario = new javax.swing.JPanel();
         jpLabels = new javax.swing.JPanel();
@@ -44,7 +45,6 @@ public class AgregarPass extends javax.swing.JDialog {
         txtFechaVencimiento = new javax.swing.JTextField();
         jpBotones = new javax.swing.JPanel();
         bntAceptarPass = new javax.swing.JButton();
-        bntCancelarPass = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Contraseña");
@@ -87,8 +87,6 @@ public class AgregarPass extends javax.swing.JDialog {
             }
         });
 
-        bntCancelarPass.setText("Cancelar");
-
         javax.swing.GroupLayout jpBotonesLayout = new javax.swing.GroupLayout(jpBotones);
         jpBotones.setLayout(jpBotonesLayout);
         jpBotonesLayout.setHorizontalGroup(
@@ -96,17 +94,14 @@ public class AgregarPass extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpBotonesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bntAceptarPass)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bntCancelarPass))
+                .addContainerGap())
         );
         jpBotonesLayout.setVerticalGroup(
             jpBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpBotonesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntAceptarPass)
-                    .addComponent(bntCancelarPass))
-                .addContainerGap(13, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpBotonesLayout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addComponent(bntAceptarPass)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,8 +131,13 @@ public class AgregarPass extends javax.swing.JDialog {
     private void bntAceptarPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAceptarPassActionPerformed
         if (!validaDatos()){
             // llama codigo para insersión..
-            
+            String datos = "'"+nombreUsuario+"'"+","+"'"+txtContrasena.getText()+"'"+","
+                    +"'"+txtNombreSitio.getText()+"'"+","+"'"+txtUrlSitio.getText()+"'";
+            JOptionPane.showMessageDialog(null,datos);
+          //  InterfazConexion nuevaConexion = new InterfazConexion();
+           // nuevaConexion.ingresaPassword(datos);
         }
+        else
           JOptionPane.showMessageDialog(this,"Existen datos vacíos, por favor rellene el formulario completo","Atención",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_bntAceptarPassActionPerformed
     
@@ -154,6 +154,10 @@ public class AgregarPass extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
+    
+    public void setNombreUsuario(String nombreUsuario){
+        this.nombreUsuario = nombreUsuario;
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -195,7 +199,6 @@ public class AgregarPass extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAceptarPass;
-    private javax.swing.JButton bntCancelarPass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
