@@ -43,6 +43,7 @@ public class Login extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Inicio");
 
         jLabel1.setText("Usuario");
 

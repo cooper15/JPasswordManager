@@ -6,6 +6,10 @@
 
 package ui;
 
+import Conexiones.InterfazConexion;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author cooper15
@@ -44,6 +48,11 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestor de contraseñas");
         setName("Principal"); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jToolBar1.setRollover(true);
 
@@ -156,6 +165,36 @@ public class Principal extends javax.swing.JFrame {
         AgregarUsuario dialogNewUsuario = new AgregarUsuario(this,true);
         dialogNewUsuario.setVisible(true);
     }//GEN-LAST:event_jmiNuevoUsuarioActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // Llenar la tabla con los datos resultantes del ResultSet...
+        DefaultTableModel modeloTabla = new DefaultTableModel();
+        this.jtPasswords.setModel(modeloTabla);
+        
+        InterfazConexion nuevaConexion = new InterfazConexion();
+        ResultSet resultado = nuevaConexion.ObtieneDatosPassword(nombreUsuario);
+        
+        String nombreColumnas [] = {"id", "Usuario", "Contraseña", "Nombre sitio", "URL sitio"};
+        for (int i=0; i<=4; i++)
+            modeloTabla.addColumn(nombreColumnas[i]);
+        
+        try{
+             while(resultado.next()){
+                 Object[] fila = new Object[5];
+                 for (int i = 0; i < 5; i++) {
+                            fila[i]=resultado.getObject(i+1);
+                 }
+                 modeloTabla.addRow(fila);
+            }
+        }
+        catch(Exception e){
+        }
+          
+       jtPasswords.getColumnModel().getColumn(0).setMaxWidth(0);
+       jtPasswords.getColumnModel().getColumn(0).setMinWidth(0);
+       jtPasswords.getColumnModel().getColumn(0).setPreferredWidth(0);
+       
+    }//GEN-LAST:event_formWindowOpened
     public void setNombreUsuario( String nombreUsuario){
         this.nombreUsuario = nombreUsuario;
     }

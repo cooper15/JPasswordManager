@@ -70,4 +70,19 @@ public class Conexion {
     
     }
     
+       protected ResultSet obtienePass(String usuario){
+        java.sql.Connection conexion= conectar();
+        ResultSet resultado = null;
+        try {
+            if (conexion != null){
+                Statement estado = conexion.createStatement(); 
+                resultado  = estado.executeQuery ( "Call obtienePasswords("+ "'"+usuario+"'"+")"  );
+            }
+   
+        }
+        catch(SQLException e){
+        }
+        return resultado;
+    }
+    
 }

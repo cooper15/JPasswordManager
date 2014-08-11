@@ -35,5 +35,12 @@ public class InterfazConexion {
         Conexion conexionDatos = new Conexion();
         conexionDatos.insertarPassword(datos);
     }
+    
+    public ResultSet ObtieneDatosPassword(String usuario){
+        ResultSet resultado = null;
+             Conexion nuevaConexion = new Conexion();
+             resultado = nuevaConexion.obtienePass(usuario);
+        return resultado;
+    }
 }
     
