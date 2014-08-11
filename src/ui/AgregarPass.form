@@ -115,6 +115,9 @@
             <Component class="javax.swing.JTextField" name="txtUrlSitio">
             </Component>
             <Component class="javax.swing.JTextField" name="txtFechaVencimiento">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 /**
  *
  * @author cooper15
@@ -59,7 +60,8 @@ public class Conexion {
         try {
             if (conexion != null){
                 Statement estado = conexion.createStatement(); 
-                estado.executeQuery ("Call agregarPassword("+datos+")");
+                 ResultSet rs = estado.executeQuery ("Call agregarPassword("+datos+")");
+                
             }
            
         }

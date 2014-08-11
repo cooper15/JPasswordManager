@@ -47,7 +47,7 @@ public class Principal extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        bntNuevoPass.setText("Nuevo Pass");
+        bntNuevoPass.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/img/list-add.png")); // NOI18N
         bntNuevoPass.setFocusable(false);
         bntNuevoPass.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bntNuevoPass.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -86,6 +86,7 @@ public class Principal extends javax.swing.JFrame {
 
         jmArchivo.setText("Archivo");
 
+        jmiNuevoUsuario.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/img/contact-new.png")); // NOI18N
         jmiNuevoUsuario.setText("Nuevo Usuario");
         jmiNuevoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,9 +95,12 @@ public class Principal extends javax.swing.JFrame {
         });
         jmArchivo.add(jmiNuevoUsuario);
 
+        jmiEliminarUsuario.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/img/process-stop.png")); // NOI18N
         jmiEliminarUsuario.setText("Eliminar Usuario");
         jmArchivo.add(jmiEliminarUsuario);
 
+        jmiSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        jmiSalir.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/img/window-close.png")); // NOI18N
         jmiSalir.setText("Salir");
         jmiSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +120,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,7 +143,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalirActionPerformed
-        // TODO add your handling code here:
+       System.exit(0);
     }//GEN-LAST:event_jmiSalirActionPerformed
 
     private void bntNuevoPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntNuevoPassActionPerformed

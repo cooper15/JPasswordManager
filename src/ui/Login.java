@@ -37,9 +37,10 @@ public class Login extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jtUsuarioLogin = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jtContrasenaLogin = new javax.swing.JTextField();
         bntAceptarLogin = new javax.swing.JButton();
         lblErrorLogin = new javax.swing.JLabel();
+        jtContrasenaLogin = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,20 +55,29 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
+        jtContrasenaLogin.setEchoChar(' ');
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/img/passwords.png")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(128, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bntAceptarLogin)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
                     .addComponent(jtUsuarioLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                     .addComponent(jtContrasenaLogin)
                     .addComponent(lblErrorLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(52, 52, 52))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bntAceptarLogin)
+                .addGap(111, 111, 111))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,13 +85,16 @@ public class Login extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtUsuarioLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jtUsuarioLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addGap(16, 16, 16)
+                        .addComponent(jtContrasenaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtContrasenaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblErrorLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                .addComponent(lblErrorLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 12, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bntAceptarLogin)
                 .addContainerGap())
@@ -92,10 +105,11 @@ public class Login extends javax.swing.JDialog {
 
     private void bntAceptarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAceptarLoginActionPerformed
         InterfazConexion interfaz = new InterfazConexion();
-        String Resultado = interfaz.ObtieneDatosUsuario(jtUsuarioLogin.getText(), jtContrasenaLogin.getText());
-          if(!jtUsuarioLogin.getText().equals("") && !jtContrasenaLogin.getText().equals(""))  {
-            
-              if (Resultado.contains(jtUsuarioLogin.getText()) && Resultado.contains(jtContrasenaLogin.getText())){
+        String contrasena = new String (jtContrasenaLogin.getPassword());
+        String Resultado = interfaz.ObtieneDatosUsuario(jtUsuarioLogin.getText(), contrasena);
+          if(!jtUsuarioLogin.getText().equals("") && !contrasena.equals(""))  {
+            System.out.print(contrasena);
+              if (Resultado.contains(jtUsuarioLogin.getText()) && Resultado.contains(contrasena)){
                     Principal principal = new Principal();
                     principal.setNombreUsuario(jtUsuarioLogin.getText());
                     principal.setVisible(true);
@@ -159,7 +173,8 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JButton bntAceptarLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jtContrasenaLogin;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPasswordField jtContrasenaLogin;
     private javax.swing.JTextField jtUsuarioLogin;
     private javax.swing.JLabel lblErrorLogin;
     // End of variables declaration//GEN-END:variables

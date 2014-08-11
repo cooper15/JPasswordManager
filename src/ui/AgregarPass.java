@@ -76,6 +76,8 @@ public class AgregarPass extends javax.swing.JDialog {
         jpTextos.add(txtRepitaContrasena);
         jpTextos.add(txtNombreSitio);
         jpTextos.add(txtUrlSitio);
+
+        txtFechaVencimiento.setEditable(false);
         jpTextos.add(txtFechaVencimiento);
 
         jpFormulario.add(jpTextos, java.awt.BorderLayout.CENTER);
@@ -134,8 +136,8 @@ public class AgregarPass extends javax.swing.JDialog {
             String datos = "'"+nombreUsuario+"'"+","+"'"+txtContrasena.getText()+"'"+","
                     +"'"+txtNombreSitio.getText()+"'"+","+"'"+txtUrlSitio.getText()+"'";
             JOptionPane.showMessageDialog(null,datos);
-          //  InterfazConexion nuevaConexion = new InterfazConexion();
-           // nuevaConexion.ingresaPassword(datos);
+            InterfazConexion nuevaConexion = new InterfazConexion();
+            nuevaConexion.ingresaPassword(datos);
         }
         else
           JOptionPane.showMessageDialog(this,"Existen datos vacíos, por favor rellene el formulario completo","Atención",JOptionPane.INFORMATION_MESSAGE);
@@ -146,7 +148,7 @@ public class AgregarPass extends javax.swing.JDialog {
         
            if (txtContrasena.getText().equals("") || txtRepitaContrasena.getText().equals("")
                 || txtNombreSitio.getText().equals("")  || txtUrlSitio.getText().equals("")
-                || txtFechaVencimiento.getText().equals(""))
+                )
                vacio = true;
            
         return vacio;
