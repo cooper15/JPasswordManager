@@ -141,6 +141,7 @@ public class AgregarPass extends javax.swing.JDialog {
         }
         else
           JOptionPane.showMessageDialog(this,"Existen datos vacíos, por favor rellene el formulario completo","Atención",JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
     }//GEN-LAST:event_bntAceptarPassActionPerformed
     
     private boolean validaDatos(){

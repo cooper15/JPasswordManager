@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package ui;
 
@@ -38,10 +33,11 @@ public class AgregarUsuario extends javax.swing.JDialog {
         jtNombreUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jtContrasena = new javax.swing.JTextField();
-        jtRepitaContrasena = new javax.swing.JTextField();
         bntAgregarUsuari = new javax.swing.JButton();
         bntCancelarUsuario = new javax.swing.JButton();
+        jtContrasena = new javax.swing.JPasswordField();
+        jtRepitaContrasena = new javax.swing.JPasswordField();
+        lblCoincide = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Usuario");
@@ -53,12 +49,6 @@ public class AgregarUsuario extends javax.swing.JDialog {
 
         jLabel3.setText("Repita la contraseña");
 
-        jtContrasena.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtContrasenaActionPerformed(evt);
-            }
-        });
-
         bntAgregarUsuari.setText("Agregar");
         bntAgregarUsuari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +57,11 @@ public class AgregarUsuario extends javax.swing.JDialog {
         });
 
         bntCancelarUsuario.setText("Cancelar");
+        bntCancelarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntCancelarUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -80,17 +75,19 @@ public class AgregarUsuario extends javax.swing.JDialog {
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jtNombreUsuario)
                             .addComponent(jtContrasena)
-                            .addComponent(jtRepitaContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)))
+                            .addComponent(jtRepitaContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                        .addGap(12, 12, 12))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bntAgregarUsuari)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bntCancelarUsuario)))
-                .addGap(12, 12, 12))
+                        .addComponent(bntCancelarUsuario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblCoincide, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,11 +104,15 @@ public class AgregarUsuario extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtRepitaContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntAgregarUsuari)
-                    .addComponent(bntCancelarUsuario))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bntAgregarUsuari)
+                        .addComponent(bntCancelarUsuario))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblCoincide, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -128,31 +129,54 @@ public class AgregarUsuario extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtContrasenaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtContrasenaActionPerformed
-
     private void bntAgregarUsuariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAgregarUsuariActionPerformed
         // validar datos
-        if(!validaDatos()){
-            String datosObtenidos = "'"+jtNombreUsuario.getText()+"'"+","+"'"+jtContrasena.getText()+"'"; 
+        String contrasena = new String ( jtContrasena.getPassword() );
+        
+        if( !validaDatos() && coincidePasswords() ){
+            String datosObtenidos = "'"+jtNombreUsuario.getText()+"'"+","+"'"+contrasena+"'"; 
             InterfazConexion conectar = new InterfazConexion();
             conectar.ingresarDatosUsuario(datosObtenidos);
+            this.dispose();
             
         }
+        else 
+            if (!coincidePasswords())
+                lblCoincide.setText("Las contraseñas no coinciden");
+        
     }//GEN-LAST:event_bntAgregarUsuariActionPerformed
+
+    private void bntCancelarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarUsuarioActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_bntCancelarUsuarioActionPerformed
     
     private boolean validaDatos(){
         boolean vacio = false;
-            if (jtContrasena.getText().equals("") | jtNombreUsuario.getText().equals("") | jtRepitaContrasena.getText().equals(""))
-                return true;
+        String contrasena = new String ( jtContrasena.getPassword() );
+        String repitaContrasena = new String ( jtRepitaContrasena.getPassword() );
+        
+        if ( contrasena.equals("") | jtNombreUsuario.getText().equals("") | repitaContrasena.equals("") )
+            return true;
+        
         return vacio;
+    }
+    private boolean coincidePasswords(){
+        boolean coincide = false;
+           String contrasena1 = new String ( jtContrasena.getPassword() );
+           String contrasena2 = new String ( jtRepitaContrasena.getPassword() );
+           
+           if( contrasena1.equals(contrasena2) )
+               coincide = true;
+           else 
+               return coincide;
+           
+        return coincide;
     }
     /**
      * @param args the command line arguments
@@ -203,8 +227,9 @@ public class AgregarUsuario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jtContrasena;
+    private javax.swing.JPasswordField jtContrasena;
     private javax.swing.JTextField jtNombreUsuario;
-    private javax.swing.JTextField jtRepitaContrasena;
+    private javax.swing.JPasswordField jtRepitaContrasena;
+    private javax.swing.JLabel lblCoincide;
     // End of variables declaration//GEN-END:variables
 }
