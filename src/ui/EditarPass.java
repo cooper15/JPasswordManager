@@ -8,14 +8,31 @@ import javax.swing.JOptionPane;
  *
  * @author cooper15
  */
-public class AgregarPass extends javax.swing.JDialog {
+public class EditarPass extends javax.swing.JDialog {
 
-    /**
-     * Creates new form AgregarPass
-     */
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
 
-    String nombreUsuario;
-    public AgregarPass(java.awt.Frame parent, boolean modal) {
+    public void setContrasenaUsuario(String contrasenaSitio) {
+        this.contrasenaSitio= contrasenaSitio;
+    }
+
+    public void setNombreSitio(String nombreSitio) {
+        this.nombreSitio = nombreSitio;
+    }
+
+    public void setUrlSitio(String urlSitio) {
+        this.urlSitio = urlSitio;
+    }
+    
+    
+    private String nombreUsuario;
+    private String contrasenaSitio;
+    private String nombreSitio;
+    private String urlSitio;
+    
+    public EditarPass(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setResizable(false);
@@ -39,8 +56,8 @@ public class AgregarPass extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jpTextos = new javax.swing.JPanel();
+        txtUsuario = new javax.swing.JTextField();
         txtContrasena = new javax.swing.JPasswordField();
-        txtRepitaContrasena = new javax.swing.JPasswordField();
         txtNombreSitio = new javax.swing.JTextField();
         txtUrlSitio = new javax.swing.JTextField();
         txtFechaVencimiento = new javax.swing.JTextField();
@@ -50,15 +67,20 @@ public class AgregarPass extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Contraseña");
         setName("AgregarPass"); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jpFormulario.setLayout(new java.awt.BorderLayout());
 
         jpLabels.setLayout(new java.awt.GridLayout(5, 0, 10, 20));
 
-        jLabel1.setText("Contraseña");
+        jLabel1.setText("Usuario");
         jpLabels.add(jLabel1);
 
-        jLabel2.setText("Repita la contraseña");
+        jLabel2.setText("Contraseña");
         jpLabels.add(jLabel2);
 
         jLabel3.setText("Nombre del Sitio             ");
@@ -73,14 +95,14 @@ public class AgregarPass extends javax.swing.JDialog {
         jpFormulario.add(jpLabels, java.awt.BorderLayout.LINE_START);
 
         jpTextos.setLayout(new java.awt.GridLayout(5, 0, 0, 20));
-        jpTextos.add(txtContrasena);
+        jpTextos.add(txtUsuario);
 
-        txtRepitaContrasena.addActionListener(new java.awt.event.ActionListener() {
+        txtContrasena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRepitaContrasenaActionPerformed(evt);
+                txtContrasenaActionPerformed(evt);
             }
         });
-        jpTextos.add(txtRepitaContrasena);
+        jpTextos.add(txtContrasena);
         jpTextos.add(txtNombreSitio);
         jpTextos.add(txtUrlSitio);
 
@@ -141,7 +163,7 @@ public class AgregarPass extends javax.swing.JDialog {
        
         String contrasena = new String ( txtContrasena.getPassword() );
        
-        if ( !validaDatos() && coincidePasswords() ){
+        if ( !validaDatos()  ){
             // llama codigo para insersión..
             String datos = "'"+nombreUsuario+"'"+","+"'"+contrasena+"'"+","
                     +"'"+txtNombreSitio.getText()+"'"+","+"'"+txtUrlSitio.getText()+"'";
@@ -150,25 +172,30 @@ public class AgregarPass extends javax.swing.JDialog {
             nuevaConexion.ingresaPassword(datos);
             this.dispose();
         }
-        else 
-            if( !coincidePasswords() )
-                JOptionPane.showMessageDialog(this,"Las contraseñas no coinciden");
+
         
         else
           JOptionPane.showMessageDialog(this,"Existen datos vacíos, por favor rellene el formulario completo","Atención",JOptionPane.INFORMATION_MESSAGE);
         
     }//GEN-LAST:event_bntAceptarPassActionPerformed
 
-    private void txtRepitaContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRepitaContrasenaActionPerformed
+    private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtRepitaContrasenaActionPerformed
+    }//GEN-LAST:event_txtContrasenaActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        txtUsuario.setText(nombreUsuario);
+        txtContrasena.setText(contrasenaSitio);
+        txtNombreSitio.setText(nombreSitio);
+        txtUrlSitio.setText(urlSitio);
+    }//GEN-LAST:event_formWindowOpened
     
     private boolean validaDatos(){
         boolean vacio = false;
-        String contrasena1 = new String ( txtContrasena.getPassword() );
-        String contrasena2 = new String ( txtRepitaContrasena.getPassword() );
+      
+        String contrasena2 = new String ( txtContrasena.getPassword() );
         
-           if (contrasena1.equals("") || contrasena2.equals("")
+           if (txtUsuario.getText().equals("") || contrasena2.equals("")
                 || txtNombreSitio.getText().equals("")  || txtUrlSitio.getText().equals("")
                 )
                vacio = true;
@@ -176,23 +203,21 @@ public class AgregarPass extends javax.swing.JDialog {
         return vacio;
     }
     
-    private boolean coincidePasswords(){
+  /*  private boolean coincidePasswords(){
         boolean coincide = false;
-        String contrasena1 = new String ( txtContrasena.getPassword() );
-        String contrasena2 = new String ( txtRepitaContrasena.getPassword() );   
+        String contrasena1 = new String ( txtUsuario.getPassword() );
+        String contrasena2 = new String ( txtContrasena.getPassword() );   
         
         if (contrasena1.equals(contrasena2))
             coincide = true;
 
         return coincide;
-    }
+    }*/
     /**
      * @param args the command line arguments
      */
     
-    public void setNombreUsuario(String nombreUsuario){
-        this.nombreUsuario = nombreUsuario;
-    }
+ 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -207,20 +232,20 @@ public class AgregarPass extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgregarPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgregarPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgregarPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AgregarPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AgregarPass dialog = new AgregarPass(new javax.swing.JFrame(), true);
+                EditarPass dialog = new EditarPass(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -246,7 +271,7 @@ public class AgregarPass extends javax.swing.JDialog {
     private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtFechaVencimiento;
     private javax.swing.JTextField txtNombreSitio;
-    private javax.swing.JPasswordField txtRepitaContrasena;
     private javax.swing.JTextField txtUrlSitio;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,7 @@ package ui;
 
 import Conexiones.InterfazConexion;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,6 +36,7 @@ public class Principal extends javax.swing.JFrame {
 
         jToolBar1 = new javax.swing.JToolBar();
         bntNuevoPass = new javax.swing.JButton();
+        bntVisualizarActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtPasswords = new javax.swing.JTable();
         jpBarraDeEstado = new javax.swing.JPanel();
@@ -66,6 +68,17 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(bntNuevoPass);
+
+        bntVisualizarActualizar.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/img/visualization.png")); // NOI18N
+        bntVisualizarActualizar.setFocusable(false);
+        bntVisualizarActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bntVisualizarActualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bntVisualizarActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntVisualizarActualizarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(bntVisualizarActualizar);
 
         jtPasswords.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -195,6 +208,26 @@ public class Principal extends javax.swing.JFrame {
        jtPasswords.getColumnModel().getColumn(0).setPreferredWidth(0);
        
     }//GEN-LAST:event_formWindowOpened
+
+    private void bntVisualizarActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVisualizarActualizarActionPerformed
+        int fila, columna;
+        fila = jtPasswords.getSelectedRow();
+        //columna = jtPasswords.getSelectedColumn();
+          
+       if (jtPasswords.isRowSelected(fila)){
+            EditarPass editar = new EditarPass(this,true);
+            
+            editar.setNombreUsuario(nombreUsuario);
+            editar.setContrasenaUsuario( jtPasswords.getModel().getValueAt(fila, 2).toString() );
+            editar.setNombreSitio( jtPasswords.getModel().getValueAt(fila, 3).toString() );
+            editar.setUrlSitio( jtPasswords.getModel().getValueAt(fila,4).toString() );
+            
+            editar.setVisible(true);
+        }
+       else 
+           JOptionPane.showMessageDialog(this, "No ha seleccionado ninguna fila");
+        
+    }//GEN-LAST:event_bntVisualizarActualizarActionPerformed
     public void setNombreUsuario( String nombreUsuario){
         this.nombreUsuario = nombreUsuario;
     }
@@ -233,6 +266,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntNuevoPass;
+    private javax.swing.JButton bntVisualizarActualizar;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
