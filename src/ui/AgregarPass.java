@@ -43,7 +43,7 @@ public class AgregarPass extends javax.swing.JDialog {
         txtRepitaContrasena = new javax.swing.JPasswordField();
         txtNombreSitio = new javax.swing.JTextField();
         txtUrlSitio = new javax.swing.JTextField();
-        txtFechaVencimiento = new javax.swing.JTextField();
+        fechaDch = new datechooser.beans.DateChooserCombo();
         jpBotones = new javax.swing.JPanel();
         bntAceptarPass = new javax.swing.JButton();
 
@@ -83,9 +83,7 @@ public class AgregarPass extends javax.swing.JDialog {
         jpTextos.add(txtRepitaContrasena);
         jpTextos.add(txtNombreSitio);
         jpTextos.add(txtUrlSitio);
-
-        txtFechaVencimiento.setEditable(false);
-        jpTextos.add(txtFechaVencimiento);
+        jpTextos.add(fechaDch);
 
         jpFormulario.add(jpTextos, java.awt.BorderLayout.CENTER);
 
@@ -140,7 +138,6 @@ public class AgregarPass extends javax.swing.JDialog {
     private void bntAceptarPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAceptarPassActionPerformed
        
         String contrasena = new String ( txtContrasena.getPassword() );
-       
         if ( !validaDatos() && coincidePasswords() ){
             // llama codigo para insersión..
             String datos = "'"+nombreUsuario+"'"+","+"'"+contrasena+"'"+","
@@ -234,6 +231,7 @@ public class AgregarPass extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAceptarPass;
+    private datechooser.beans.DateChooserCombo fechaDch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -244,7 +242,6 @@ public class AgregarPass extends javax.swing.JDialog {
     private javax.swing.JPanel jpLabels;
     private javax.swing.JPanel jpTextos;
     private javax.swing.JPasswordField txtContrasena;
-    private javax.swing.JTextField txtFechaVencimiento;
     private javax.swing.JTextField txtNombreSitio;
     private javax.swing.JPasswordField txtRepitaContrasena;
     private javax.swing.JTextField txtUrlSitio;

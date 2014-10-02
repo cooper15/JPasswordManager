@@ -60,14 +60,25 @@ public class Conexion {
         try {
             if (conexion != null){
                 Statement estado = conexion.createStatement(); 
-                 ResultSet rs = estado.executeQuery ("Call agregarPassword("+datos+")");
+                estado.executeQuery ("Call agregarPassword("+datos+")");
                 
             }
            
         }
         catch(SQLException e){
         }
+    }
     
+       protected void actualizarPassword(int id, String datos){
+        java.sql.Connection conexion= conectar();
+        try {
+            if (conexion != null){
+                Statement estado = conexion.createStatement(); 
+                estado.executeQuery ("Call actualizarPassword("+"'"+id+"'"+","+datos+")");
+            }   
+        }
+        catch(SQLException e){
+        }
     }
     
        protected ResultSet obtienePass(String usuario){

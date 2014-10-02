@@ -2,6 +2,25 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
+    <Container class="javax.swing.JPopupMenu" name="menuContextual">
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuContextualMousePressed"/>
+      </Events>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="menuContextualEliminar">
+          <Properties>
+            <Property name="label" type="java.lang.String" value="Eliminar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuContextualEliminarMousePressed"/>
+          </Events>
+        </MenuItem>
+      </SubComponents>
+    </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jmArchivo">
@@ -12,7 +31,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jmiNuevoUsuario">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/cooper15/NetBeansProjects/img/contact-new.png"/>
+                  <Image iconType="2" name="/home/cooper15/NetBeansProjects/GestorContrase&#xf1;a/img/contact-new.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo Usuario"/>
               </Properties>
@@ -23,7 +42,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jmiEliminarUsuario">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/cooper15/NetBeansProjects/img/process-stop.png"/>
+                  <Image iconType="2" name="/home/cooper15/NetBeansProjects/GestorContrase&#xf1;a/img/process-stop.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Usuario"/>
               </Properties>
@@ -34,7 +53,7 @@
                   <KeyStroke key="Ctrl+Q"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/cooper15/NetBeansProjects/img/window-close.png"/>
+                  <Image iconType="2" name="/home/cooper15/NetBeansProjects/GestorContrase&#xf1;a/img/window-close.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Salir"/>
               </Properties>
@@ -80,7 +99,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jToolBar1" pref="391" max="32767" attributes="0"/>
+          <Component id="jToolBar1" pref="576" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -107,7 +126,7 @@
   <SubComponents>
     <Container class="javax.swing.JToolBar" name="jToolBar1">
       <Properties>
-        <Property name="rollover" type="boolean" value="true"/>
+        <Property name="floatable" type="boolean" value="false"/>
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>

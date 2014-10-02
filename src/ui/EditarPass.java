@@ -2,6 +2,7 @@
 package ui;
 
 import Conexiones.InterfazConexion;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,8 +26,12 @@ public class EditarPass extends javax.swing.JDialog {
     public void setUrlSitio(String urlSitio) {
         this.urlSitio = urlSitio;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
-    
+    private int id;
     private String nombreUsuario;
     private String contrasenaSitio;
     private String nombreSitio;
@@ -60,12 +65,12 @@ public class EditarPass extends javax.swing.JDialog {
         txtContrasena = new javax.swing.JPasswordField();
         txtNombreSitio = new javax.swing.JTextField();
         txtUrlSitio = new javax.swing.JTextField();
-        txtFechaVencimiento = new javax.swing.JTextField();
+        fechaDch = new datechooser.beans.DateChooserCombo();
         jpBotones = new javax.swing.JPanel();
         bntAceptarPass = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Agregar Contraseña");
+        setTitle("Editar Contraseña");
         setName("AgregarPass"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -105,9 +110,7 @@ public class EditarPass extends javax.swing.JDialog {
         jpTextos.add(txtContrasena);
         jpTextos.add(txtNombreSitio);
         jpTextos.add(txtUrlSitio);
-
-        txtFechaVencimiento.setEditable(false);
-        jpTextos.add(txtFechaVencimiento);
+        jpTextos.add(fechaDch);
 
         jpFormulario.add(jpTextos, java.awt.BorderLayout.CENTER);
 
@@ -165,15 +168,21 @@ public class EditarPass extends javax.swing.JDialog {
        
         if ( !validaDatos()  ){
             // llama codigo para insersión..
+            String diaMes = 
+                    Integer.toString(fechaDch.getCurrent().get(Calendar.DAY_OF_MONTH));
+            String mes = 
+                    Integer.toString(fechaDch.getCurrent().get(Calendar.MONTH));
+            String anio = 
+                    Integer.toString(fechaDch.getCurrent().get(Calendar.YEAR));
+            String fecha = diaMes+"/"+mes+"/"+anio;
             String datos = "'"+nombreUsuario+"'"+","+"'"+contrasena+"'"+","
-                    +"'"+txtNombreSitio.getText()+"'"+","+"'"+txtUrlSitio.getText()+"'";
+                            +"'"+txtNombreSitio.getText()+"'"+","+"'"
+                            +txtUrlSitio.getText()+"'";
             JOptionPane.showMessageDialog(null,datos);
             InterfazConexion nuevaConexion = new InterfazConexion();
-            nuevaConexion.ingresaPassword(datos);
+            nuevaConexion.actualizaPassword(id, datos);
             this.dispose();
         }
-
-        
         else
           JOptionPane.showMessageDialog(this,"Existen datos vacíos, por favor rellene el formulario completo","Atención",JOptionPane.INFORMATION_MESSAGE);
         
@@ -192,14 +201,12 @@ public class EditarPass extends javax.swing.JDialog {
     
     private boolean validaDatos(){
         boolean vacio = false;
-      
         String contrasena2 = new String ( txtContrasena.getPassword() );
-        
-           if (txtUsuario.getText().equals("") || contrasena2.equals("")
-                || txtNombreSitio.getText().equals("")  || txtUrlSitio.getText().equals("")
-                )
+           if (txtUsuario.getText().equals("") 
+                || contrasena2.equals("")
+                || txtNombreSitio.getText().equals("")  
+                || txtUrlSitio.getText().equals(""))
                vacio = true;
-           
         return vacio;
     }
     
@@ -259,6 +266,7 @@ public class EditarPass extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAceptarPass;
+    private datechooser.beans.DateChooserCombo fechaDch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -269,7 +277,6 @@ public class EditarPass extends javax.swing.JDialog {
     private javax.swing.JPanel jpLabels;
     private javax.swing.JPanel jpTextos;
     private javax.swing.JPasswordField txtContrasena;
-    private javax.swing.JTextField txtFechaVencimiento;
     private javax.swing.JTextField txtNombreSitio;
     private javax.swing.JTextField txtUrlSitio;
     private javax.swing.JTextField txtUsuario;

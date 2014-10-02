@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package ui;
 
@@ -34,6 +29,8 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        menuContextual = new javax.swing.JPopupMenu();
+        menuContextualEliminar = new javax.swing.JMenuItem();
         jToolBar1 = new javax.swing.JToolBar();
         bntNuevoPass = new javax.swing.JButton();
         bntVisualizarActualizar = new javax.swing.JButton();
@@ -47,6 +44,20 @@ public class Principal extends javax.swing.JFrame {
         jmiSalir = new javax.swing.JMenuItem();
         jmEditar = new javax.swing.JMenu();
 
+        menuContextual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuContextualMousePressed(evt);
+            }
+        });
+
+        menuContextualEliminar.setLabel("Eliminar");
+        menuContextualEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuContextualEliminarMousePressed(evt);
+            }
+        });
+        menuContextual.add(menuContextualEliminar);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestor de contraseñas");
         setName("Principal"); // NOI18N
@@ -56,7 +67,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jToolBar1.setRollover(true);
+        jToolBar1.setFloatable(false);
 
         bntNuevoPass.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/img/list-add.png")); // NOI18N
         bntNuevoPass.setFocusable(false);
@@ -108,7 +119,7 @@ public class Principal extends javax.swing.JFrame {
 
         jmArchivo.setText("Archivo");
 
-        jmiNuevoUsuario.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/img/contact-new.png")); // NOI18N
+        jmiNuevoUsuario.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/GestorContraseña/img/contact-new.png")); // NOI18N
         jmiNuevoUsuario.setText("Nuevo Usuario");
         jmiNuevoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,12 +128,12 @@ public class Principal extends javax.swing.JFrame {
         });
         jmArchivo.add(jmiNuevoUsuario);
 
-        jmiEliminarUsuario.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/img/process-stop.png")); // NOI18N
+        jmiEliminarUsuario.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/GestorContraseña/img/process-stop.png")); // NOI18N
         jmiEliminarUsuario.setText("Eliminar Usuario");
         jmArchivo.add(jmiEliminarUsuario);
 
         jmiSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
-        jmiSalir.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/img/window-close.png")); // NOI18N
+        jmiSalir.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/GestorContraseña/img/window-close.png")); // NOI18N
         jmiSalir.setText("Salir");
         jmiSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,7 +153,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,6 +192,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // Llenar la tabla con los datos resultantes del ResultSet...
+        jtPasswords.setComponentPopupMenu(menuContextual);
+        
         DefaultTableModel modeloTabla = new DefaultTableModel();
         this.jtPasswords.setModel(modeloTabla);
         
@@ -190,7 +203,7 @@ public class Principal extends javax.swing.JFrame {
         String nombreColumnas [] = {"id", "Usuario", "Contraseña", "Nombre sitio", "URL sitio"};
         for (int i=0; i<=4; i++)
             modeloTabla.addColumn(nombreColumnas[i]);
-        
+       
         try{
              while(resultado.next()){
                  Object[] fila = new Object[5];
@@ -202,13 +215,29 @@ public class Principal extends javax.swing.JFrame {
         }
         catch(Exception e){
         }
-          
+        // Esconder el campo Id de la tabla password.
        jtPasswords.getColumnModel().getColumn(0).setMaxWidth(0);
        jtPasswords.getColumnModel().getColumn(0).setMinWidth(0);
        jtPasswords.getColumnModel().getColumn(0).setPreferredWidth(0);
+       // Esconder el campo password 
+       jtPasswords.getColumnModel().getColumn(2).setMaxWidth(0);
+       jtPasswords.getColumnModel().getColumn(2).setMinWidth(0);
+       jtPasswords.getColumnModel().getColumn(2).setPreferredWidth(0);
        
     }//GEN-LAST:event_formWindowOpened
-
+    private boolean celdaPresionada(){
+        boolean presionada = false;
+        int fila = jtPasswords.getSelectedRow();
+        int columna = jtPasswords.getSelectedColumn();
+            
+        if (fila != -1 && columna != -1 )
+            presionada = true;
+            
+        return presionada;
+    
+    }
+    
+    
     private void bntVisualizarActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVisualizarActualizarActionPerformed
         int fila, columna;
         fila = jtPasswords.getSelectedRow();
@@ -218,6 +247,7 @@ public class Principal extends javax.swing.JFrame {
             EditarPass editar = new EditarPass(this,true);
             
             editar.setNombreUsuario(nombreUsuario);
+            editar.setId((int) jtPasswords.getModel().getValueAt(fila, 0));
             editar.setContrasenaUsuario( jtPasswords.getModel().getValueAt(fila, 2).toString() );
             editar.setNombreSitio( jtPasswords.getModel().getValueAt(fila, 3).toString() );
             editar.setUrlSitio( jtPasswords.getModel().getValueAt(fila,4).toString() );
@@ -228,6 +258,17 @@ public class Principal extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this, "No ha seleccionado ninguna fila");
         
     }//GEN-LAST:event_bntVisualizarActualizarActionPerformed
+
+    private void menuContextualMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuContextualMousePressed
+       
+    }//GEN-LAST:event_menuContextualMousePressed
+
+    private void menuContextualEliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuContextualEliminarMousePressed
+        if(!celdaPresionada())
+            JOptionPane.showMessageDialog(this, "no seleccionó celda" );
+        else 
+            JOptionPane.showMessageDialog(this, "eliminada!");
+    }//GEN-LAST:event_menuContextualEliminarMousePressed
     public void setNombreUsuario( String nombreUsuario){
         this.nombreUsuario = nombreUsuario;
     }
@@ -277,5 +318,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiSalir;
     private javax.swing.JPanel jpBarraDeEstado;
     private javax.swing.JTable jtPasswords;
+    private javax.swing.JPopupMenu menuContextual;
+    private javax.swing.JMenuItem menuContextualEliminar;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,11 +36,20 @@ public class InterfazConexion {
         conexionDatos.insertarPassword(datos);
     }
     
+    public void actualizaPassword(int id, String datos){
+        Conexion conexionDatos = new Conexion();
+        conexionDatos.actualizarPassword(id, datos);
+    }
+    
     public ResultSet ObtieneDatosPassword(String usuario){
         ResultSet resultado = null;
              Conexion nuevaConexion = new Conexion();
              resultado = nuevaConexion.obtienePass(usuario);
+
         return resultado;
+        
     }
+    
+     
 }
     
