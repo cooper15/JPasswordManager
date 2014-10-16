@@ -200,14 +200,14 @@ public class Principal extends javax.swing.JFrame {
         InterfazConexion nuevaConexion = new InterfazConexion();
         ResultSet resultado = nuevaConexion.ObtieneDatosPassword(nombreUsuario);
         
-        String nombreColumnas [] = {"id", "Usuario", "Contraseña", "Nombre sitio", "URL sitio"};
-        for (int i=0; i<=4; i++)
+        String nombreColumnas [] = {"id", "Usuario", "Contraseña", "Nombre sitio", "URL sitio","Fecha Venc"};
+        for (int i=0; i<=5; i++)
             modeloTabla.addColumn(nombreColumnas[i]);
        
         try{
              while(resultado.next()){
-                 Object[] fila = new Object[5];
-                 for (int i = 0; i < 5; i++) {
+                 Object[] fila = new Object[6];
+                 for (int i = 0; i < 6; i++) {
                             fila[i]=resultado.getObject(i+1);
                  }
                  modeloTabla.addRow(fila);
@@ -248,9 +248,9 @@ public class Principal extends javax.swing.JFrame {
             
             editar.setNombreUsuario(nombreUsuario);
             editar.setId((int) jtPasswords.getModel().getValueAt(fila, 0));
-            editar.setContrasenaUsuario( jtPasswords.getModel().getValueAt(fila, 2).toString() );
-            editar.setNombreSitio( jtPasswords.getModel().getValueAt(fila, 3).toString() );
-            editar.setUrlSitio( jtPasswords.getModel().getValueAt(fila,4).toString() );
+            editar.setContrasenaUsuario(jtPasswords.getModel().getValueAt(fila, 2).toString());
+            editar.setNombreSitio(jtPasswords.getModel().getValueAt(fila, 3).toString());
+            editar.setUrlSitio(jtPasswords.getModel().getValueAt(fila,4).toString());
             
             editar.setVisible(true);
         }

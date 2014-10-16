@@ -2,6 +2,7 @@
 package ui;
 
 import Conexiones.InterfazConexion;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 /**
@@ -83,6 +84,12 @@ public class AgregarPass extends javax.swing.JDialog {
         jpTextos.add(txtRepitaContrasena);
         jpTextos.add(txtNombreSitio);
         jpTextos.add(txtUrlSitio);
+
+        try {
+            fechaDch.setDefaultPeriods(new datechooser.model.multiple.PeriodSet());
+        } catch (datechooser.model.exeptions.IncompatibleDataExeption e1) {
+            e1.printStackTrace();
+        }
         jpTextos.add(fechaDch);
 
         jpFormulario.add(jpTextos, java.awt.BorderLayout.CENTER);
@@ -140,8 +147,16 @@ public class AgregarPass extends javax.swing.JDialog {
         String contrasena = new String ( txtContrasena.getPassword() );
         if ( !validaDatos() && coincidePasswords() ){
             // llama codigo para insersión..
+            String diaMes = 
+                    Integer.toString(fechaDch.getCurrent().get(Calendar.DAY_OF_MONTH));
+            String mes = 
+                    Integer.toString(fechaDch.getCurrent().get(Calendar.MONTH + 1));
+            String anio = 
+                    Integer.toString(fechaDch.getCurrent().get(Calendar.YEAR));
+            String fecha = "'"+anio+"-"+mes+"-"+diaMes+"'";
             String datos = "'"+nombreUsuario+"'"+","+"'"+contrasena+"'"+","
-                    +"'"+txtNombreSitio.getText()+"'"+","+"'"+txtUrlSitio.getText()+"'";
+                         +"'"+txtNombreSitio.getText()+"'"+","
+                         +"'"+txtUrlSitio.getText()+"'"+","+fecha;
             JOptionPane.showMessageDialog(null,datos);
             InterfazConexion nuevaConexion = new InterfazConexion();
             nuevaConexion.ingresaPassword(datos);

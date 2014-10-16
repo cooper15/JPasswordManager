@@ -110,6 +110,12 @@ public class EditarPass extends javax.swing.JDialog {
         jpTextos.add(txtContrasena);
         jpTextos.add(txtNombreSitio);
         jpTextos.add(txtUrlSitio);
+
+        try {
+            fechaDch.setDefaultPeriods(new datechooser.model.multiple.PeriodSet());
+        } catch (datechooser.model.exeptions.IncompatibleDataExeption e1) {
+            e1.printStackTrace();
+        }
         jpTextos.add(fechaDch);
 
         jpFormulario.add(jpTextos, java.awt.BorderLayout.CENTER);
@@ -145,7 +151,7 @@ public class EditarPass extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                    .addComponent(jpFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -171,10 +177,12 @@ public class EditarPass extends javax.swing.JDialog {
             String diaMes = 
                     Integer.toString(fechaDch.getCurrent().get(Calendar.DAY_OF_MONTH));
             String mes = 
-                    Integer.toString(fechaDch.getCurrent().get(Calendar.MONTH));
+                    Integer.toString(fechaDch.getCurrent().get(Calendar.MONTH) + 1);
             String anio = 
                     Integer.toString(fechaDch.getCurrent().get(Calendar.YEAR));
             String fecha = diaMes+"/"+mes+"/"+anio;
+            
+            JOptionPane.showMessageDialog(null,fecha);
             String datos = "'"+nombreUsuario+"'"+","+"'"+contrasena+"'"+","
                             +"'"+txtNombreSitio.getText()+"'"+","+"'"
                             +txtUrlSitio.getText()+"'";
