@@ -109,16 +109,16 @@ public class Login extends javax.swing.JDialog {
         String contrasena = new String (jtContrasenaLogin.getPassword());
         String Resultado = interfaz.ObtieneDatosUsuario(jtUsuarioLogin.getText(), contrasena);
             if(!jtUsuarioLogin.getText().equals("") && !contrasena.equals(""))  {
-                if (Resultado.contains(jtUsuarioLogin.getText()) && Resultado.contains(contrasena)){
+                if(Resultado.contains(jtUsuarioLogin.getText()) && Resultado.contains(contrasena)){
                     Principal principal = new Principal();
                     principal.setNombreUsuario(jtUsuarioLogin.getText());
                     principal.setVisible(true);
                     this.dispose();
                 }
               else{
-                  lblErrorLogin.setText("Usuario o Contraseña invalidos");
-                  jtUsuarioLogin.setText("");
-                  jtContrasenaLogin.setText("");
+                lblErrorLogin.setText("Usuario o Contraseña invalidos");
+                jtUsuarioLogin.setText("");
+                jtContrasenaLogin.setText("");
               }
           }
             else JOptionPane.showMessageDialog(null,"Rellene los campos en blanco","Error!", JOptionPane.ERROR_MESSAGE);
