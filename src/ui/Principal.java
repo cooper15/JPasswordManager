@@ -225,8 +225,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     private void refrescar_tabla(){
-
-            DefaultTableModel modeloTabla = new DefaultTableModel();
+        DefaultTableModel modeloTabla = new DefaultTableModel();
         this.jtPasswords.setModel(modeloTabla);
         
         InterfazConexion nuevaConexion = new InterfazConexion();
@@ -262,7 +261,6 @@ public class Principal extends javax.swing.JFrame {
         int fila, columna;
         fila = jtPasswords.getSelectedRow();
         //columna = jtPasswords.getSelectedColumn();
-          
        if (jtPasswords.isRowSelected(fila)){
             EditarPass editar = new EditarPass(this,true);
             
@@ -271,7 +269,6 @@ public class Principal extends javax.swing.JFrame {
             editar.setContrasenaUsuario(jtPasswords.getModel().getValueAt(fila, 2).toString());
             editar.setNombreSitio(jtPasswords.getModel().getValueAt(fila, 3).toString());
             editar.setUrlSitio(jtPasswords.getModel().getValueAt(fila, 4).toString());
-            
             editar.setVisible(true);
         }
        else 

@@ -178,7 +178,6 @@ public class AgregarPass extends javax.swing.JDialog {
         boolean vacio = false;
         String contrasena1 = new String (txtContrasena.getPassword());
         String contrasena2 = new String (txtRepitaContrasena.getPassword());
-        
            if (contrasena1.equals("") || contrasena2.equals("")
                 || txtNombreSitio.getText().equals("")  || txtUrlSitio.getText().equals("")
                 )
@@ -186,7 +185,7 @@ public class AgregarPass extends javax.swing.JDialog {
            
         return vacio;
     }
-    
+
     private boolean coincidePasswords(){
         boolean coincide = false;
         String contrasena1 = new String ( txtContrasena.getPassword() );
