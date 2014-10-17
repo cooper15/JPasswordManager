@@ -32,8 +32,8 @@ public class Conexion {
             if (conexion != null){
                Statement estado = conexion.createStatement(); 
                estado.executeQuery ("Call agregarUsuario("+datos+")");
+               estado.close();
             }
-           
         }
         catch(SQLException e){
         }
@@ -95,5 +95,16 @@ public class Conexion {
         }
         return resultado;
     }
-    
+       
+       protected void elinina_password(String id){
+          java.sql.Connection conectar = conectar();
+           try{
+              if(conectar != null){
+                  Statement estado = conectar.createStatement();
+                  estado.executeQuery("call eliminarPassword("+"'"+id+"'"+")");
+              }   
+          }
+          catch(SQLException e){
+          }
+       }
 }

@@ -34,9 +34,11 @@ public class Principal extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         bntNuevoPass = new javax.swing.JButton();
         bntVisualizarActualizar = new javax.swing.JButton();
+        refrescar_bnt = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtPasswords = new javax.swing.JTable();
         jpBarraDeEstado = new javax.swing.JPanel();
+        estado_lbl = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmArchivo = new javax.swing.JMenu();
         jmiNuevoUsuario = new javax.swing.JMenuItem();
@@ -91,6 +93,17 @@ public class Principal extends javax.swing.JFrame {
         });
         jToolBar1.add(bntVisualizarActualizar);
 
+        refrescar_bnt.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/GestorContraseña/img/view-refresh.png")); // NOI18N
+        refrescar_bnt.setFocusable(false);
+        refrescar_bnt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        refrescar_bnt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        refrescar_bnt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refrescar_bntActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(refrescar_bnt);
+
         jtPasswords.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -110,11 +123,13 @@ public class Principal extends javax.swing.JFrame {
         jpBarraDeEstado.setLayout(jpBarraDeEstadoLayout);
         jpBarraDeEstadoLayout.setHorizontalGroup(
             jpBarraDeEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jpBarraDeEstadoLayout.createSequentialGroup()
+                .addComponent(estado_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jpBarraDeEstadoLayout.setVerticalGroup(
             jpBarraDeEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
+            .addComponent(estado_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
         );
 
         jmArchivo.setText("Archivo");
@@ -168,8 +183,8 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jpBarraDeEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jpBarraDeEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -194,13 +209,30 @@ public class Principal extends javax.swing.JFrame {
         // Llenar la tabla con los datos resultantes del ResultSet...
         jtPasswords.setComponentPopupMenu(menuContextual);
         
-        DefaultTableModel modeloTabla = new DefaultTableModel();
+        refrescar_tabla();
+       
+    }//GEN-LAST:event_formWindowOpened
+    private boolean celdaPresionada(){
+        boolean presionada = false;
+        int fila = jtPasswords.getSelectedRow();
+        int columna = jtPasswords.getSelectedColumn();
+            
+        if (fila != -1 && columna != -1 )
+            presionada = true;
+            
+        return presionada;
+    
+    }
+    
+    private void refrescar_tabla(){
+
+            DefaultTableModel modeloTabla = new DefaultTableModel();
         this.jtPasswords.setModel(modeloTabla);
         
         InterfazConexion nuevaConexion = new InterfazConexion();
         ResultSet resultado = nuevaConexion.ObtieneDatosPassword(nombreUsuario);
         
-        String nombreColumnas [] = {"id", "Usuario", "Contraseña", "Nombre sitio", "URL sitio","Fecha Venc"};
+        String nombreColumnas [] = {"id", "Usuario", "Contraseña", "Nombre sitio", "URL sitio","Vencimiento"};
         for (int i=0; i<=5; i++)
             modeloTabla.addColumn(nombreColumnas[i]);
        
@@ -223,18 +255,6 @@ public class Principal extends javax.swing.JFrame {
        jtPasswords.getColumnModel().getColumn(2).setMaxWidth(0);
        jtPasswords.getColumnModel().getColumn(2).setMinWidth(0);
        jtPasswords.getColumnModel().getColumn(2).setPreferredWidth(0);
-       
-    }//GEN-LAST:event_formWindowOpened
-    private boolean celdaPresionada(){
-        boolean presionada = false;
-        int fila = jtPasswords.getSelectedRow();
-        int columna = jtPasswords.getSelectedColumn();
-            
-        if (fila != -1 && columna != -1 )
-            presionada = true;
-            
-        return presionada;
-    
     }
     
     
@@ -250,7 +270,7 @@ public class Principal extends javax.swing.JFrame {
             editar.setId((int) jtPasswords.getModel().getValueAt(fila, 0));
             editar.setContrasenaUsuario(jtPasswords.getModel().getValueAt(fila, 2).toString());
             editar.setNombreSitio(jtPasswords.getModel().getValueAt(fila, 3).toString());
-            editar.setUrlSitio(jtPasswords.getModel().getValueAt(fila,4).toString());
+            editar.setUrlSitio(jtPasswords.getModel().getValueAt(fila, 4).toString());
             
             editar.setVisible(true);
         }
@@ -266,10 +286,21 @@ public class Principal extends javax.swing.JFrame {
     private void menuContextualEliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuContextualEliminarMousePressed
         if(!celdaPresionada())
             JOptionPane.showMessageDialog(this, "no seleccionó celda" );
-        else 
-            JOptionPane.showMessageDialog(this, "eliminada!");
+        else{
+            InterfazConexion inte_con = new InterfazConexion();
+            int fila = jtPasswords.getSelectedRow();
+            String id = jtPasswords.getModel().getValueAt(fila, 0).toString();
+            inte_con.eliminar_password(id);
+            estado_lbl.setText("Contraseña eliminada");
+        }       
     }//GEN-LAST:event_menuContextualEliminarMousePressed
+
+    private void refrescar_bntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refrescar_bntActionPerformed
+        refrescar_tabla();
+        estado_lbl.setText("");
+    }//GEN-LAST:event_refrescar_bntActionPerformed
     public void setNombreUsuario( String nombreUsuario){
+        // Usuario logeado
         this.nombreUsuario = nombreUsuario;
     }
 
@@ -308,6 +339,7 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntNuevoPass;
     private javax.swing.JButton bntVisualizarActualizar;
+    private javax.swing.JLabel estado_lbl;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
@@ -320,5 +352,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTable jtPasswords;
     private javax.swing.JPopupMenu menuContextual;
     private javax.swing.JMenuItem menuContextualEliminar;
+    private javax.swing.JButton refrescar_bnt;
     // End of variables declaration//GEN-END:variables
 }

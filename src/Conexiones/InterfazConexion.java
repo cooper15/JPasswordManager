@@ -17,17 +17,16 @@ public class InterfazConexion {
     }
     
     public String ObtieneDatosUsuario( String usuario, String password){
-        String datos ="";
-        
-            Conexion conexionDatos = new Conexion();
-            ResultSet Resultado = conexionDatos.obtieneUsuarioPass( usuario, password);
-            try  {
-                while(Resultado.next()){
-                    datos += Resultado.getString(1) + Resultado.getString(2);
-                }
+        String datos ="";  
+        Conexion conexionDatos = new Conexion();
+        ResultSet Resultado = conexionDatos.obtieneUsuarioPass( usuario, password);
+        try{
+            while(Resultado.next()){
+                datos += Resultado.getString(1) + Resultado.getString(2);
             }
-            catch(SQLException e){
-            }
+        }
+        catch(SQLException e){
+        }
         return datos;
     }
     
@@ -43,13 +42,14 @@ public class InterfazConexion {
     
     public ResultSet ObtieneDatosPassword(String usuario){
         ResultSet resultado = null;
-             Conexion nuevaConexion = new Conexion();
-             resultado = nuevaConexion.obtienePass(usuario);
-
+        Conexion nuevaConexion = new Conexion();
+        resultado = nuevaConexion.obtienePass(usuario);
         return resultado;
-        
     }
     
-     
+    public void eliminar_password(String id){
+        Conexion nueva_conexion = new Conexion();
+        nueva_conexion.elinina_password(id);
+    }
 }
     

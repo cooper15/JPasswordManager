@@ -143,31 +143,30 @@ public class AgregarPass extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntAceptarPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAceptarPassActionPerformed
-       
         String contrasena = new String ( txtContrasena.getPassword() );
-        if ( !validaDatos() && coincidePasswords() ){
+            if ( !validaDatos() && coincidePasswords() ){
             // llama codigo para insersión..
-            String diaMes = 
-                    Integer.toString(fechaDch.getCurrent().get(Calendar.DAY_OF_MONTH));
-            String mes = 
-                    Integer.toString(fechaDch.getCurrent().get(Calendar.MONTH + 1));
-            String anio = 
-                    Integer.toString(fechaDch.getCurrent().get(Calendar.YEAR));
-            String fecha = "'"+anio+"-"+mes+"-"+diaMes+"'";
-            String datos = "'"+nombreUsuario+"'"+","+"'"+contrasena+"'"+","
+                String diaMes = 
+                        Integer.toString(fechaDch.getCurrent().get(Calendar.DAY_OF_MONTH));
+                String mes = 
+                        Integer.toString(fechaDch.getCurrent().get(Calendar.MONTH ) +1);
+                String anio = 
+                        Integer.toString(fechaDch.getCurrent().get(Calendar.YEAR));
+                String fecha = "'"+anio+"-"+mes+"-"+diaMes+"'";
+                String datos = "'"+nombreUsuario+"'"+","+"'"+contrasena+"'"+","
                          +"'"+txtNombreSitio.getText()+"'"+","
                          +"'"+txtUrlSitio.getText()+"'"+","+fecha;
-            JOptionPane.showMessageDialog(null,datos);
-            InterfazConexion nuevaConexion = new InterfazConexion();
-            nuevaConexion.ingresaPassword(datos);
-            this.dispose();
+                JOptionPane.showMessageDialog(null,datos);
+                InterfazConexion nuevaConexion = new InterfazConexion();
+                nuevaConexion.ingresaPassword(datos);
+                this.dispose();
         }
-        else 
-            if( !coincidePasswords() )
-                JOptionPane.showMessageDialog(this,"Las contraseñas no coinciden");
+            else 
+                if( !coincidePasswords() )
+                    JOptionPane.showMessageDialog(this,"Las contraseñas no coinciden");
         
-        else
-          JOptionPane.showMessageDialog(this,"Existen datos vacíos, por favor rellene el formulario completo","Atención",JOptionPane.INFORMATION_MESSAGE);
+            else
+                JOptionPane.showMessageDialog(this,"Existen datos vacíos, por favor rellene el formulario completo","Atención",JOptionPane.INFORMATION_MESSAGE);
         
     }//GEN-LAST:event_bntAceptarPassActionPerformed
 
@@ -177,8 +176,8 @@ public class AgregarPass extends javax.swing.JDialog {
     
     private boolean validaDatos(){
         boolean vacio = false;
-        String contrasena1 = new String ( txtContrasena.getPassword() );
-        String contrasena2 = new String ( txtRepitaContrasena.getPassword() );
+        String contrasena1 = new String (txtContrasena.getPassword());
+        String contrasena2 = new String (txtRepitaContrasena.getPassword());
         
            if (contrasena1.equals("") || contrasena2.equals("")
                 || txtNombreSitio.getText().equals("")  || txtUrlSitio.getText().equals("")
@@ -202,6 +201,11 @@ public class AgregarPass extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     
+    /**
+     *
+     * @param nombreUsuario
+     * @param args the command line arguments
+     */
     public void setNombreUsuario(String nombreUsuario){
         this.nombreUsuario = nombreUsuario;
     }
