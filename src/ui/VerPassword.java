@@ -39,8 +39,9 @@ public class VerPassword extends javax.swing.JDialog {
         menu_contextual = new javax.swing.JPopupMenu();
         menu_item_copiar = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
-        ver_password_txt = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        ver_password_txt = new javax.swing.JPasswordField();
+        ver_password_btn = new javax.swing.JToggleButton();
 
         menu_contextual.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -57,6 +58,7 @@ public class VerPassword extends javax.swing.JDialog {
         menu_contextual.add(menu_item_copiar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -66,26 +68,41 @@ public class VerPassword extends javax.swing.JDialog {
 
         jLabel1.setText("Password: ");
 
+        jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         ver_password_txt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 ver_password_txtMousePressed(evt);
             }
         });
 
-        jButton1.setText("Aceptar");
+        ver_password_btn.setText("V");
+        ver_password_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ver_password_btnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(ver_password_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ver_password_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ver_password_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +110,8 @@ public class VerPassword extends javax.swing.JDialog {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(ver_password_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ver_password_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ver_password_btn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -106,18 +124,30 @@ public class VerPassword extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_menu_contextualMousePressed
 
-    private void ver_password_txtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ver_password_txtMousePressed
-        ver_password_txt.setComponentPopupMenu(menu_contextual);
-    }//GEN-LAST:event_ver_password_txtMousePressed
-
     private void menu_item_copiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_item_copiarActionPerformed
       InterfazAccionesClipboard acciones = new InterfazAccionesClipboard();
-      acciones.copy_to_clipboard(ver_password_txt.getText());
+      String password_a_copiar = new String(ver_password_txt.getPassword());
+      acciones.copy_to_clipboard(password_a_copiar);
     }//GEN-LAST:event_menu_item_copiarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         ver_password_txt.setText(password);
     }//GEN-LAST:event_formWindowOpened
+
+    private void ver_password_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ver_password_btnActionPerformed
+        if(ver_password_btn.isSelected())
+            ver_password_txt.setEchoChar((char) 0);
+        else
+            ver_password_txt.setEchoChar('*');
+    }//GEN-LAST:event_ver_password_btnActionPerformed
+
+    private void ver_password_txtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ver_password_txtMousePressed
+        ver_password_txt.setComponentPopupMenu(menu_contextual);
+    }//GEN-LAST:event_ver_password_txtMousePressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,6 +196,7 @@ public class VerPassword extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPopupMenu menu_contextual;
     private javax.swing.JMenuItem menu_item_copiar;
-    private javax.swing.JTextField ver_password_txt;
+    private javax.swing.JToggleButton ver_password_btn;
+    private javax.swing.JPasswordField ver_password_txt;
     // End of variables declaration//GEN-END:variables
 }
