@@ -15,7 +15,7 @@ import java.awt.datatransfer.StringSelection;
  */
 public class AccionesClipboard {
     protected void copy_to_clipboard(String password_copiada){
-          Toolkit utilidades = Toolkit.getDefaultToolkit();
+        Toolkit utilidades = Toolkit.getDefaultToolkit();
         Clipboard portapapeles = utilidades.getSystemClipboard();
         StringSelection cadena_a_tran = new StringSelection(password_copiada);
         portapapeles.setContents(cadena_a_tran, null);

@@ -21,7 +21,12 @@ public class VerPassword extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(parent);
     }
+    private String password;
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,6 +58,11 @@ public class VerPassword extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Password: ");
 
@@ -104,6 +114,10 @@ public class VerPassword extends javax.swing.JDialog {
       InterfazAccionesClipboard acciones = new InterfazAccionesClipboard();
       acciones.copy_to_clipboard(ver_password_txt.getText());
     }//GEN-LAST:event_menu_item_copiarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        ver_password_txt.setText(password);
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

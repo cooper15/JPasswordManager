@@ -2,6 +2,7 @@
 package ui;
 
 import Conexiones.InterfazConexion;
+import cifrado.AccCifrado;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -291,24 +292,36 @@ public class Principal extends javax.swing.JFrame {
 
     private void menuContextualEliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuContextualEliminarMousePressed
         if(!celdaPresionada())
-            JOptionPane.showMessageDialog(this, "no seleccionó celda" );
+            JOptionPane.showMessageDialog(this, "No selecionó ninguna celda");
         else{
             InterfazConexion inte_con = new InterfazConexion();
-            int fila = jtPasswords.getSelectedRow();
+            int fila = numero_fila();
             String id = jtPasswords.getModel().getValueAt(fila, 0).toString();
             inte_con.eliminar_password(id);
             estado_lbl.setText("Contraseña eliminada");
         }       
     }//GEN-LAST:event_menuContextualEliminarMousePressed
 
+    private int numero_fila(){
+       return jtPasswords.getSelectedRow();
+    }
     private void refrescar_bntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refrescar_bntActionPerformed
         refrescar_tabla();
         estado_lbl.setText("");
     }//GEN-LAST:event_refrescar_bntActionPerformed
 
     private void menu_contextual_ver_PassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_contextual_ver_PassActionPerformed
-        VerPassword ver_password = new VerPassword(this, true);
-        ver_password.setVisible(true);
+        if (celdaPresionada()){
+            int fila = numero_fila();
+            String pass_a_copiar = jtPasswords.getModel().getValueAt(fila, 2).toString();
+            VerPassword ver_password = new VerPassword(this, true);
+            AccCifrado descifrar = new AccCifrado();
+            pass_a_copiar = descifrar.descifrar_password(pass_a_copiar);
+            ver_password.setPassword(pass_a_copiar);
+            ver_password.setVisible(true);
+        }
+        else
+            JOptionPane.showMessageDialog(null, "No selecionó ninguna celda");
     }//GEN-LAST:event_menu_contextual_ver_PassActionPerformed
     public void setNombreUsuario( String nombreUsuario){
         // Usuario logeado
