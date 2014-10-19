@@ -2,6 +2,7 @@
 package ui;
 
 import Conexiones.InterfazConexion;
+import cifrado.AccCifrado;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 
@@ -144,7 +145,9 @@ public class AgregarPass extends javax.swing.JDialog {
 
     private void bntAceptarPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAceptarPassActionPerformed
         String contrasena = new String ( txtContrasena.getPassword() );
-            if ( !validaDatos() && coincidePasswords() ){
+            if (!validaDatos() && coincidePasswords()){
+                AccCifrado cifrar = new AccCifrado();
+                contrasena = cifrar.cifrar_password(contrasena);
             // llama codigo para insersión..
                 String diaMes = 
                         Integer.toString(fechaDch.getCurrent().get(Calendar.DAY_OF_MONTH));

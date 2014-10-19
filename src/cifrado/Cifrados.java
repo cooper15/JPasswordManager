@@ -12,16 +12,16 @@ import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
  * @author cooper15
  */
 public class Cifrados {
-     
+    static final private String CLAVE_CIFRADO = "a%bc&fc345-#hi154%";
     protected String cifrado_password(String pass){
         StandardPBEStringEncryptor objeto_cifrado = new StandardPBEStringEncryptor();
-        objeto_cifrado.setPassword("123");
+        objeto_cifrado.setPassword(CLAVE_CIFRADO);
         return objeto_cifrado.encrypt(pass);
     }
     
     protected String descifrado_password(String txt){
         StandardPBEStringEncryptor objeto_descifrado = new StandardPBEStringEncryptor();
-        objeto_descifrado.setPassword("123");
+        objeto_descifrado.setPassword(CLAVE_CIFRADO);
         String retorno = "";
         try{
             retorno = objeto_descifrado.decrypt(txt);

@@ -2,6 +2,7 @@
 package ui;
 
 import Conexiones.InterfazConexion;
+import cifrado.AccCifrado;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 
@@ -16,7 +17,7 @@ public class EditarPass extends javax.swing.JDialog {
     }
 
     public void setContrasenaUsuario(String contrasenaSitio) {
-        this.contrasenaSitio= contrasenaSitio;
+        this.contrasenaSitio = contrasenaSitio;
     }
 
     public void setNombreSitio(String nombreSitio) {
@@ -68,6 +69,7 @@ public class EditarPass extends javax.swing.JDialog {
         fechaDch = new datechooser.beans.DateChooserCombo();
         jpBotones = new javax.swing.JPanel();
         bntAceptarPass = new javax.swing.JButton();
+        ver_btn = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Contraseña");
@@ -144,6 +146,13 @@ public class EditarPass extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        ver_btn.setText("V");
+        ver_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ver_btnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -151,16 +160,25 @@ public class EditarPass extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jpBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jpFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addComponent(ver_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jpFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jpFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(ver_btn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jpBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -201,11 +219,20 @@ public class EditarPass extends javax.swing.JDialog {
     }//GEN-LAST:event_txtContrasenaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        AccCifrado descifrar = new AccCifrado();
+        contrasenaSitio = descifrar.descifrar_password(contrasenaSitio);
         txtUsuario.setText(nombreUsuario);
         txtContrasena.setText(contrasenaSitio);
         txtNombreSitio.setText(nombreSitio);
         txtUrlSitio.setText(urlSitio);
     }//GEN-LAST:event_formWindowOpened
+
+    private void ver_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ver_btnActionPerformed
+        if(ver_btn.isSelected())
+            txtContrasena.setEchoChar((char) 0);
+        else
+            txtContrasena.setEchoChar('*');
+    }//GEN-LAST:event_ver_btnActionPerformed
     
     private boolean validaDatos(){
         boolean vacio = false;
@@ -288,5 +315,6 @@ public class EditarPass extends javax.swing.JDialog {
     private javax.swing.JTextField txtNombreSitio;
     private javax.swing.JTextField txtUrlSitio;
     private javax.swing.JTextField txtUsuario;
+    private javax.swing.JToggleButton ver_btn;
     // End of variables declaration//GEN-END:variables
 }

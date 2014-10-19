@@ -13,10 +13,22 @@
       <SubComponents>
         <MenuItem class="javax.swing.JMenuItem" name="menuContextualEliminar">
           <Properties>
-            <Property name="label" type="java.lang.String" value="Eliminar"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;Eliminar&quot;" type="code"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuContextualEliminarMousePressed"/>
+          </Events>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="menu_contextual_ver_Pass">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;Ver contrase&#xf1;a&quot;" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_contextual_ver_PassActionPerformed"/>
           </Events>
         </MenuItem>
       </SubComponents>

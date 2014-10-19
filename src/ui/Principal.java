@@ -31,6 +31,7 @@ public class Principal extends javax.swing.JFrame {
 
         menuContextual = new javax.swing.JPopupMenu();
         menuContextualEliminar = new javax.swing.JMenuItem();
+        menu_contextual_ver_Pass = new javax.swing.JMenuItem();
         jToolBar1 = new javax.swing.JToolBar();
         bntNuevoPass = new javax.swing.JButton();
         bntVisualizarActualizar = new javax.swing.JButton();
@@ -52,13 +53,21 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        menuContextualEliminar.setLabel("Eliminar");
+        menuContextualEliminar.setText("Eliminar");
         menuContextualEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 menuContextualEliminarMousePressed(evt);
             }
         });
         menuContextual.add(menuContextualEliminar);
+
+        menu_contextual_ver_Pass.setText("Ver contraseña");
+        menu_contextual_ver_Pass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_contextual_ver_PassActionPerformed(evt);
+            }
+        });
+        menuContextual.add(menu_contextual_ver_Pass);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestor de contraseñas");
@@ -296,6 +305,11 @@ public class Principal extends javax.swing.JFrame {
         refrescar_tabla();
         estado_lbl.setText("");
     }//GEN-LAST:event_refrescar_bntActionPerformed
+
+    private void menu_contextual_ver_PassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_contextual_ver_PassActionPerformed
+        VerPassword ver_password = new VerPassword(this, true);
+        ver_password.setVisible(true);
+    }//GEN-LAST:event_menu_contextual_ver_PassActionPerformed
     public void setNombreUsuario( String nombreUsuario){
         // Usuario logeado
         this.nombreUsuario = nombreUsuario;
@@ -349,6 +363,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTable jtPasswords;
     private javax.swing.JPopupMenu menuContextual;
     private javax.swing.JMenuItem menuContextualEliminar;
+    private javax.swing.JMenuItem menu_contextual_ver_Pass;
     private javax.swing.JButton refrescar_bnt;
     // End of variables declaration//GEN-END:variables
 }
