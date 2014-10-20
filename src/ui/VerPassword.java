@@ -126,7 +126,7 @@ public class VerPassword extends javax.swing.JDialog {
 
     private void menu_item_copiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_item_copiarActionPerformed
       InterfazAccionesClipboard acciones = new InterfazAccionesClipboard();
-      String password_a_copiar = new String(ver_password_txt.getPassword());
+      String password_a_copiar = ver_password_txt.getSelectedText();
       acciones.copy_to_clipboard(password_a_copiar);
     }//GEN-LAST:event_menu_item_copiarActionPerformed
 
