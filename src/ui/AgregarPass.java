@@ -4,7 +4,9 @@ package ui;
 import Conexiones.InterfazConexion;
 import cifrado.AccCifrado;
 import java.util.Calendar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 
 /**
  *
@@ -16,7 +18,7 @@ public class AgregarPass extends javax.swing.JDialog {
      * Creates new form AgregarPass
      */
 
-    String nombreUsuario;
+    String nombre_usuario;
     public AgregarPass(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -41,10 +43,10 @@ public class AgregarPass extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jpTextos = new javax.swing.JPanel();
-        txtContrasena = new javax.swing.JPasswordField();
-        txtRepitaContrasena = new javax.swing.JPasswordField();
-        txtNombreSitio = new javax.swing.JTextField();
-        txtUrlSitio = new javax.swing.JTextField();
+        contrasena_txt = new javax.swing.JPasswordField();
+        repita_contrass_txt = new javax.swing.JPasswordField();
+        nombre_sitio_txt = new javax.swing.JTextField();
+        url_sitio_txt = new javax.swing.JTextField();
         fechaDch = new datechooser.beans.DateChooserCombo();
         jpBotones = new javax.swing.JPanel();
         bntAceptarPass = new javax.swing.JButton();
@@ -75,16 +77,16 @@ public class AgregarPass extends javax.swing.JDialog {
         jpFormulario.add(jpLabels, java.awt.BorderLayout.LINE_START);
 
         jpTextos.setLayout(new java.awt.GridLayout(5, 0, 0, 20));
-        jpTextos.add(txtContrasena);
+        jpTextos.add(contrasena_txt);
 
-        txtRepitaContrasena.addActionListener(new java.awt.event.ActionListener() {
+        repita_contrass_txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRepitaContrasenaActionPerformed(evt);
+                repita_contrass_txtActionPerformed(evt);
             }
         });
-        jpTextos.add(txtRepitaContrasena);
-        jpTextos.add(txtNombreSitio);
-        jpTextos.add(txtUrlSitio);
+        jpTextos.add(repita_contrass_txt);
+        jpTextos.add(nombre_sitio_txt);
+        jpTextos.add(url_sitio_txt);
 
         try {
             fechaDch.setDefaultPeriods(new datechooser.model.multiple.PeriodSet());
@@ -144,60 +146,67 @@ public class AgregarPass extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntAceptarPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAceptarPassActionPerformed
-        String contrasena = new String ( txtContrasena.getPassword() );
-            if (!validaDatos() && coincidePasswords()){
+        String contrasena = new String ( contrasena_txt.getPassword() );
+            if (!valida_datos() && coincide_passwords()){
                 AccCifrado cifrar = new AccCifrado();
                 contrasena = cifrar.cifrar_password(contrasena);
             // llama codigo para insersión..
-                String diaMes = 
+                String dia_mes = 
                         Integer.toString(fechaDch.getCurrent().get(Calendar.DAY_OF_MONTH));
                 String mes = 
                         Integer.toString(fechaDch.getCurrent().get(Calendar.MONTH ) +1);
                 String anio = 
                         Integer.toString(fechaDch.getCurrent().get(Calendar.YEAR));
-                String fecha = "'"+anio+"-"+mes+"-"+diaMes+"'";
-                String datos = "'"+nombreUsuario+"'"+","+"'"+contrasena+"'"+","
-                         +"'"+txtNombreSitio.getText()+"'"+","
-                         +"'"+txtUrlSitio.getText()+"'"+","+fecha;
+                String fecha = "'"+anio+"-"+mes+"-"+dia_mes+"'";
+                String datos = "'"+nombre_usuario+"'"+","+"'"+contrasena+"'"+","
+                         +"'"+nombre_sitio_txt.getText()+"'"+","
+                         +"'"+url_sitio_txt.getText()+"'"+","+fecha;
                 JOptionPane.showMessageDialog(null,datos);
-                InterfazConexion nuevaConexion = new InterfazConexion();
-                nuevaConexion.ingresaPassword(datos);
+                InterfazConexion nueva_conexion = new InterfazConexion();
+                nueva_conexion.ingresaPassword(datos);
                 this.dispose();
         }
             else 
-                if( !coincidePasswords() )
+                if( !coincide_passwords() )
                     JOptionPane.showMessageDialog(this,"Las contraseñas no coinciden");
         
             else
-                JOptionPane.showMessageDialog(this,"Existen datos vacíos, por favor rellene el formulario completo","Atención",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Existen datos vacíos, "
+                        +"por favor rellene el formulario completo","Atención",
+                        JOptionPane.INFORMATION_MESSAGE);
         
     }//GEN-LAST:event_bntAceptarPassActionPerformed
 
-    private void txtRepitaContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRepitaContrasenaActionPerformed
+    private void repita_contrass_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repita_contrass_txtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtRepitaContrasenaActionPerformed
+    }//GEN-LAST:event_repita_contrass_txtActionPerformed
     
-    private boolean validaDatos(){
+    private boolean valida_datos(){
         boolean vacio = false;
-        String contrasena1 = new String (txtContrasena.getPassword());
-        String contrasena2 = new String (txtRepitaContrasena.getPassword());
+        String contrasena1 = new String (contrasena_txt.getPassword());
+        String contrasena2 = new String (repita_contrass_txt.getPassword());
            if (contrasena1.equals("") || contrasena2.equals("")
-                || txtNombreSitio.getText().equals("")  || txtUrlSitio.getText().equals("")
+                || nombre_sitio_txt.getText().equals("")  || url_sitio_txt.getText().equals("")
                 )
                vacio = true;
            
         return vacio;
     }
 
-    private boolean coincidePasswords(){
+    private boolean coincide_passwords(){
         boolean coincide = false;
-        String contrasena1 = new String ( txtContrasena.getPassword() );
-        String contrasena2 = new String ( txtRepitaContrasena.getPassword() );   
+        String contrasena1 = new String ( contrasena_txt.getPassword() );
+        String contrasena2 = new String ( repita_contrass_txt.getPassword() );   
         
         if (contrasena1.equals(contrasena2))
             coincide = true;
 
         return coincide;
+    }
+    private void inicializa_menu_contx(){
+        JPopupMenu menu_contextual = new JPopupMenu();
+        JMenuItem menu_item = new JMenuItem("Pegar");
+        menu_contextual.add(menu_item);
     }
     /**
      * @param args the command line arguments
@@ -209,7 +218,7 @@ public class AgregarPass extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public void setNombreUsuario(String nombreUsuario){
-        this.nombreUsuario = nombreUsuario;
+        this.nombre_usuario = nombreUsuario;
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -252,6 +261,7 @@ public class AgregarPass extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAceptarPass;
+    private javax.swing.JPasswordField contrasena_txt;
     private datechooser.beans.DateChooserCombo fechaDch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -262,9 +272,8 @@ public class AgregarPass extends javax.swing.JDialog {
     private javax.swing.JPanel jpFormulario;
     private javax.swing.JPanel jpLabels;
     private javax.swing.JPanel jpTextos;
-    private javax.swing.JPasswordField txtContrasena;
-    private javax.swing.JTextField txtNombreSitio;
-    private javax.swing.JPasswordField txtRepitaContrasena;
-    private javax.swing.JTextField txtUrlSitio;
+    private javax.swing.JTextField nombre_sitio_txt;
+    private javax.swing.JPasswordField repita_contrass_txt;
+    private javax.swing.JTextField url_sitio_txt;
     // End of variables declaration//GEN-END:variables
 }

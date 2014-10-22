@@ -14,4 +14,9 @@ public class InterfazAccionesClipboard {
         AccionesClipboard acciones = new AccionesClipboard();
         acciones.copy_to_clipboard(password_copiada);
     }
+    
+    public String paste_from_clipboard(){
+        AccionesClipboard acciones = new AccionesClipboard();
+        return acciones.paste_from_clipboard();
+    }
 }

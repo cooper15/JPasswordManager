@@ -7,7 +7,9 @@ package utilidades;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
 
 /**
  *
@@ -19,5 +21,22 @@ public class AccionesClipboard {
         Clipboard portapapeles = utilidades.getSystemClipboard();
         StringSelection cadena_a_tran = new StringSelection(password_copiada);
         portapapeles.setContents(cadena_a_tran, null);
+    }
+    
+    protected String paste_from_clipboard(){
+        Toolkit utilidades = Toolkit.getDefaultToolkit();
+        Clipboard portapapeles = utilidades.getSystemClipboard();
+        String contenido = "";
+        Transferable datos = portapapeles.getContents(null);
+        boolean es_texto = datos.isDataFlavorSupported(DataFlavor.stringFlavor);
+        if(es_texto){     
+            try{
+                contenido = (String) datos.getTransferData(DataFlavor.stringFlavor);
+            }
+            catch(Exception e){
+                return "";
+            }
+        }
+        return contenido;
     }
 }

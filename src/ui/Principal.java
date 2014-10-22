@@ -236,12 +236,12 @@ public class Principal extends javax.swing.JFrame {
     
     private void refrescar_tabla(){
         DefaultTableModel modeloTabla = new DefaultTableModel();
-        this.jtPasswords.setModel(modeloTabla);
-        
+        this.jtPasswords.setModel(modeloTabla);     
         InterfazConexion nuevaConexion = new InterfazConexion();
         ResultSet resultado = nuevaConexion.ObtieneDatosPassword(nombreUsuario);
-        
-        String nombreColumnas [] = {"id", "Usuario", "Contraseña", "Nombre sitio", "URL sitio","Vencimiento"};
+       
+        String nombreColumnas [] = {"id", "Usuario", "Contraseña", 
+                                    "Nombre sitio", "URL sitio","Vencimiento"};
         for (int i=0; i<=5; i++)
             modeloTabla.addColumn(nombreColumnas[i]);
        
