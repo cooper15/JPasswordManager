@@ -107,15 +107,24 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JPasswordField" name="contrasena_txt">
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="contrasena_txtMousePressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JPasswordField" name="repita_contrass_txt">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="repita_contrass_txtActionPerformed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="repita_contrass_txtMousePressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="nombre_sitio_txt">
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nombre_sitio_txtMousePressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="url_sitio_txt">
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="url_sitio_txtMousePressed"/>
+              </Events>
             </Component>
             <Component class="datechooser.beans.DateChooserCombo" name="fechaDch">
               <Properties>

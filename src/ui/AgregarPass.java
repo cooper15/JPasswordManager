@@ -4,7 +4,6 @@ package ui;
 import Conexiones.InterfazConexion;
 import cifrado.AccCifrado;
 import java.util.Calendar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
@@ -77,15 +76,33 @@ public class AgregarPass extends javax.swing.JDialog {
         jpFormulario.add(jpLabels, java.awt.BorderLayout.LINE_START);
 
         jpTextos.setLayout(new java.awt.GridLayout(5, 0, 0, 20));
+
+        contrasena_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                contrasena_txtMousePressed(evt);
+            }
+        });
         jpTextos.add(contrasena_txt);
 
-        repita_contrass_txt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                repita_contrass_txtActionPerformed(evt);
+        repita_contrass_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                repita_contrass_txtMousePressed(evt);
             }
         });
         jpTextos.add(repita_contrass_txt);
+
+        nombre_sitio_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                nombre_sitio_txtMousePressed(evt);
+            }
+        });
         jpTextos.add(nombre_sitio_txt);
+
+        url_sitio_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                url_sitio_txtMousePressed(evt);
+            }
+        });
         jpTextos.add(url_sitio_txt);
 
         try {
@@ -177,10 +194,38 @@ public class AgregarPass extends javax.swing.JDialog {
         
     }//GEN-LAST:event_bntAceptarPassActionPerformed
 
-    private void repita_contrass_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repita_contrass_txtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_repita_contrass_txtActionPerformed
-    
+    private void contrasena_txtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contrasena_txtMousePressed
+        MenuContextual m = new MenuContextual();
+        m.menu_contextual(contrasena_txt);
+        contrasena_txt.requestFocus();
+        JPopupMenu nuevo_menu = m.menu_contextual(contrasena_txt);
+        contrasena_txt.setComponentPopupMenu(nuevo_menu); 
+    }//GEN-LAST:event_contrasena_txtMousePressed
+
+    private void repita_contrass_txtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_repita_contrass_txtMousePressed
+        MenuContextual m = new MenuContextual();
+        m.menu_contextual(repita_contrass_txt);
+        repita_contrass_txt.requestFocus();
+        JPopupMenu nuevo_menu = m.menu_contextual(repita_contrass_txt);
+        repita_contrass_txt.setComponentPopupMenu(nuevo_menu);
+    }//GEN-LAST:event_repita_contrass_txtMousePressed
+
+    private void nombre_sitio_txtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nombre_sitio_txtMousePressed
+        MenuContextual m = new MenuContextual();        
+        m.menu_contextual(nombre_sitio_txt);
+        nombre_sitio_txt.requestFocus();
+        JPopupMenu nuevo_menu = m.menu_contextual(nombre_sitio_txt);
+        nombre_sitio_txt.setComponentPopupMenu(nuevo_menu);
+    }//GEN-LAST:event_nombre_sitio_txtMousePressed
+
+    private void url_sitio_txtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_url_sitio_txtMousePressed
+        MenuContextual m = new MenuContextual();
+        m.menu_contextual(url_sitio_txt);
+        url_sitio_txt.requestFocus();
+        JPopupMenu nuevo_menu = m.menu_contextual(url_sitio_txt);
+        url_sitio_txt.setComponentPopupMenu(nuevo_menu);    
+    }//GEN-LAST:event_url_sitio_txtMousePressed
+
     private boolean valida_datos(){
         boolean vacio = false;
         String contrasena1 = new String (contrasena_txt.getPassword());
@@ -203,11 +248,9 @@ public class AgregarPass extends javax.swing.JDialog {
 
         return coincide;
     }
-    private void inicializa_menu_contx(){
-        JPopupMenu menu_contextual = new JPopupMenu();
-        JMenuItem menu_item = new JMenuItem("Pegar");
-        menu_contextual.add(menu_item);
-    }
+
+    
+
     /**
      * @param args the command line arguments
      */
