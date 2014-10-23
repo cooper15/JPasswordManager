@@ -1,7 +1,7 @@
 
 package ui;
 
-import Conexiones.InterfazConexion;
+import conexiones.InterfazConexion;
 import cifrado.AccCifrado;
 import java.util.Calendar;
 import javax.swing.JOptionPane;

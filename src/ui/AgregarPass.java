@@ -1,7 +1,7 @@
 
 package ui;
 
-import Conexiones.InterfazConexion;
+import conexiones.InterfazConexion;
 import cifrado.AccCifrado;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
@@ -49,6 +49,7 @@ public class AgregarPass extends javax.swing.JDialog {
         fechaDch = new datechooser.beans.DateChooserCombo();
         jpBotones = new javax.swing.JPanel();
         bntAceptarPass = new javax.swing.JButton();
+        ver_password_btn = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Contraseña");
@@ -138,6 +139,13 @@ public class AgregarPass extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        ver_password_btn.setText("V");
+        ver_password_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ver_password_btnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,15 +153,22 @@ public class AgregarPass extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
-                    .addComponent(jpBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jpBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jpFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ver_password_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ver_password_btn)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jpBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -226,6 +241,13 @@ public class AgregarPass extends javax.swing.JDialog {
         url_sitio_txt.setComponentPopupMenu(nuevo_menu);    
     }//GEN-LAST:event_url_sitio_txtMousePressed
 
+    private void ver_password_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ver_password_btnActionPerformed
+        if(ver_password_btn.isSelected())
+            contrasena_txt.setEchoChar('0');
+        else
+            contrasena_txt.setEchoChar('*');
+    }//GEN-LAST:event_ver_password_btnActionPerformed
+
     private boolean valida_datos(){
         boolean vacio = false;
         String contrasena1 = new String (contrasena_txt.getPassword());
@@ -242,10 +264,8 @@ public class AgregarPass extends javax.swing.JDialog {
         boolean coincide = false;
         String contrasena1 = new String ( contrasena_txt.getPassword() );
         String contrasena2 = new String ( repita_contrass_txt.getPassword() );   
-        
         if (contrasena1.equals(contrasena2))
             coincide = true;
-
         return coincide;
     }
 
@@ -318,5 +338,6 @@ public class AgregarPass extends javax.swing.JDialog {
     private javax.swing.JTextField nombre_sitio_txt;
     private javax.swing.JPasswordField repita_contrass_txt;
     private javax.swing.JTextField url_sitio_txt;
+    private javax.swing.JToggleButton ver_password_btn;
     // End of variables declaration//GEN-END:variables
 }

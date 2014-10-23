@@ -1,7 +1,7 @@
 
 package ui;
 
-import Conexiones.InterfazConexion;
+import conexiones.InterfazConexion;
 import cifrado.AccCifrado;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -47,6 +47,7 @@ public class Principal extends javax.swing.JFrame {
         jmiEliminarUsuario = new javax.swing.JMenuItem();
         jmiSalir = new javax.swing.JMenuItem();
         jmEditar = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         menuContextual.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -170,6 +171,15 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jmArchivo);
 
         jmEditar.setText("Editar");
+
+        jMenuItem1.setText("Probar password");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jmEditar.add(jMenuItem1);
+
         jMenuBar1.add(jmEditar);
 
         setJMenuBar(jMenuBar1);
@@ -323,6 +333,11 @@ public class Principal extends javax.swing.JFrame {
         else
             JOptionPane.showMessageDialog(null, "No selecionó ninguna celda");
     }//GEN-LAST:event_menu_contextual_ver_PassActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        UtilidadesPassword password_segura = new UtilidadesPassword(this, true);
+        password_segura.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     public void setNombreUsuario( String nombreUsuario){
         // Usuario logeado
         this.nombreUsuario = nombreUsuario;
@@ -365,6 +380,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton bntVisualizarActualizar;
     private javax.swing.JLabel estado_lbl;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenu jmArchivo;

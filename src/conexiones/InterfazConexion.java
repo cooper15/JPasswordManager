@@ -1,5 +1,5 @@
 
-package Conexiones;
+package conexiones;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

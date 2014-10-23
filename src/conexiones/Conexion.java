@@ -1,5 +1,5 @@
 
-package Conexiones;
+package conexiones;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
