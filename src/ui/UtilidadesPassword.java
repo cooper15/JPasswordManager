@@ -16,7 +16,7 @@
  */
 package ui;
 
-import seguridad.SeguridadPassword;
+import seguridad.SeguridadPasswordRegEx;
 
 /**
  *
@@ -123,8 +123,8 @@ public class UtilidadesPassword extends javax.swing.JDialog {
 
     private void comprobar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comprobar_btnActionPerformed
         String password_probar = seguridad_txt.getText();
-        SeguridadPassword seguridad = new SeguridadPassword(password_probar);
-        int es_segura = seguridad.password_segura();
+        SeguridadPasswordRegEx seguridad = new SeguridadPasswordRegEx(password_probar);
+        int es_segura = seguridad.esSegura();
         if(es_segura == 0){
             barra_seguridad.setValue(10);
             segura_lbl.setText("Segura");
