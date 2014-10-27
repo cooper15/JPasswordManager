@@ -46,7 +46,7 @@ public class Conexion {
         try {
             if (conexion != null){
                 Statement estado = conexion.createStatement(); 
-                resultado  = estado.executeQuery ( "Call obtiene_Usuario_Password("+ "'"+usuario+"'" +")");
+                resultado  = estado.executeQuery ( "Call obtiene_Usuario_Password("+ "'"+usuario+"'" +")");      
             }
            
         }
