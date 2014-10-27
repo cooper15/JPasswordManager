@@ -6,7 +6,7 @@
 package cifrado;
 
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
-
+import org.jasypt.util.password.BasicPasswordEncryptor;
 /**
  *
  * @author cooper15
@@ -31,5 +31,16 @@ public class Cifrados {
         }
         return retorno;
     }
-       
+    
+    protected String cifradoPassword(String Password){
+        String contrasena = new String(Password);
+        BasicPasswordEncryptor cifrador = new BasicPasswordEncryptor();
+        contrasena = cifrador.encryptPassword(contrasena);
+        return contrasena;
+    }
+    
+    protected boolean coincidePassword(String passVerificar, String Password){
+        BasicPasswordEncryptor verificador = new BasicPasswordEncryptor();
+        return verificador.checkPassword(passVerificar, Password);
+    }
 }

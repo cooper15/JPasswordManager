@@ -40,13 +40,13 @@ public class Conexion {
         
     }
     
-    protected ResultSet obtieneUsuarioPass(String usuario, String password){
+    protected ResultSet obtieneUsuarioPass(String usuario){
         java.sql.Connection conexion= conectar();
         ResultSet resultado = null;
         try {
             if (conexion != null){
                 Statement estado = conexion.createStatement(); 
-                resultado  = estado.executeQuery ( "Call obtiene_Usuario_pass("+ "'"+usuario+"'"+","+"'"+password+"'" +")"  );
+                resultado  = estado.executeQuery ( "Call obtiene_Usuario_Password("+ "'"+usuario+"'" +")");
             }
            
         }

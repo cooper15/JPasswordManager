@@ -1,6 +1,7 @@
 
 package ui;
 
+import cifrado.AccCifrado;
 import conexiones.InterfazConexion;
 
 /**
@@ -136,25 +137,28 @@ public class AgregarUsuario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntAgregarUsuariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAgregarUsuariActionPerformed
-        // validar datos
-        String contrasena = new String ( jtContrasena.getPassword() );
-        
+        String contrasena = new String (jtContrasena.getPassword());
         if( !validaDatos() && coincidePasswords() ){
-            String datosObtenidos = "'"+jtNombreUsuario.getText()+"'"+","+"'"+contrasena+"'"; 
+            String datosObtenidos = "'" + jtNombreUsuario.getText() + "'" + ","
+                                  + "'" + this.cifraPassword() + "'"; 
             InterfazConexion conectar = new InterfazConexion();
             conectar.ingresarDatosUsuario(datosObtenidos);
             this.dispose();
-            
         }
         else 
             if (!coincidePasswords())
-                lblCoincide.setText("Las contraseñas no coinciden");
-        
+                lblCoincide.setText("Las contraseñas no coinciden");      
     }//GEN-LAST:event_bntAgregarUsuariActionPerformed
 
     private void bntCancelarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarUsuarioActionPerformed
         this.dispose();
     }//GEN-LAST:event_bntCancelarUsuarioActionPerformed
+    
+    private String cifraPassword(){
+        String password = new String(jtContrasena.getPassword());
+        AccCifrado nuevoCifrado = new AccCifrado();
+        return nuevoCifrado.cifrarPassword(password);
+    }
     
     private boolean validaDatos(){
         boolean vacio = false;

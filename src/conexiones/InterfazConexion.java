@@ -11,25 +11,32 @@ import java.sql.SQLException;
  * @author cooper15
  */
 public class InterfazConexion {
+    String password;
+    
+    public String getpassword(){
+        return password;
+    }
+    
     public void ingresarDatosUsuario(String datos){
         Conexion conexionDatos = new Conexion();
         conexionDatos.insertarUsuario(datos);
     }
     
-    public String ObtieneDatosUsuario( String usuario, String password){
-        String datos ="";  
+    public String ObtieneDatosUsuario(String usuario){
+        String datos = "";  
         Conexion conexionDatos = new Conexion();
-        ResultSet Resultado = conexionDatos.obtieneUsuarioPass( usuario, password);
+        ResultSet Resultado = conexionDatos.obtieneUsuarioPass(usuario);
         try{
             while(Resultado.next()){
-                datos += Resultado.getString(1) + Resultado.getString(2);
+                datos = Resultado.getString(1);
+                this.password = Resultado.getString(2);
             }
         }
         catch(SQLException e){
         }
         return datos;
     }
-    
+        
     public void ingresaPassword(String datos){
         Conexion conexionDatos = new Conexion();
         conexionDatos.insertarPassword(datos);

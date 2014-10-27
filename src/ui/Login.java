@@ -8,6 +8,8 @@ package ui;
 
 import conexiones.InterfazConexion;
 import javax.swing.JOptionPane;
+import cifrado.AccCifrado;
+
 
 /**
  *
@@ -105,27 +107,34 @@ public class Login extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntAceptarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAceptarLoginActionPerformed
+        login();
+    }//GEN-LAST:event_bntAceptarLoginActionPerformed
+    
+    private void login(){
         InterfazConexion interfaz = new InterfazConexion();
         String contrasena = new String (jtContrasenaLogin.getPassword());
-        String Resultado = interfaz.ObtieneDatosUsuario(jtUsuarioLogin.getText(), contrasena);
+        String Resultado = interfaz.ObtieneDatosUsuario(jtUsuarioLogin.getText());
             if(!jtUsuarioLogin.getText().equals("") && !contrasena.equals(""))  {
-                if(Resultado.contains(jtUsuarioLogin.getText()) && Resultado.contains(contrasena)){
+                if(Resultado.contains(jtUsuarioLogin.getText()) && comparaPasswords(interfaz.getpassword())){
                     Principal principal = new Principal();
                     principal.setNombreUsuario(jtUsuarioLogin.getText());
                     principal.setVisible(true);
                     this.dispose();
                 }
-              else{
-                lblErrorLogin.setText("Usuario o Contraseña invalidos");
-                jtUsuarioLogin.setText("");
-                jtContrasenaLogin.setText("");
+                else{
+                    lblErrorLogin.setText("Usuario o Contraseña invalidos");
+                    jtUsuarioLogin.setText("");
+                    jtContrasenaLogin.setText("");
               }
-          }
+            }
             else JOptionPane.showMessageDialog(null,"Rellene los campos en blanco","Error!", JOptionPane.ERROR_MESSAGE);
-     
-
-    }//GEN-LAST:event_bntAceptarLoginActionPerformed
-
+    }
+    
+    private boolean comparaPasswords(String passwordCifrado){
+        String password = new String(jtContrasenaLogin.getPassword());
+        AccCifrado nuevoDescifrado = new AccCifrado();
+        return nuevoDescifrado.coincidePassword(password, passwordCifrado);
+    }
     /**
      * @param args the command line arguments
      */

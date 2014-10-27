@@ -22,4 +22,15 @@ public class AccCifrado {
         clave = nuevo_descifrado.descifrado_password(clave);
         return clave;
     }
+    
+    public String cifrarPassword(String clave){
+        Cifrados nuevoCifrado = new Cifrados();
+        clave = nuevoCifrado.cifradoPassword(clave);
+        return clave;
+    }
+    
+    public boolean coincidePassword(String claveVerificar, String clave){
+        Cifrados nuevoDescifrado = new Cifrados();
+        return nuevoDescifrado.coincidePassword(claveVerificar, clave);
+    }
 }
