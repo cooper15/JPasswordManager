@@ -25,7 +25,7 @@ public class GenerarPasswordSeguro {
     String ALFABETO_MAYUSCULA = ALFABETO_MINUSCULA.toUpperCase();
     String NUMEROS = "0123456789";
     public String generatePassword(int longitudPassword){
-        String passwordSecure = "";
+        String passwordSecure;
         passwordSecure = generar(longitudPassword);
         return passwordSecure;
     }

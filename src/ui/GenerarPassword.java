@@ -47,7 +47,6 @@ public class GenerarPassword extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Generar");
         setName("generarForm"); // NOI18N
-        setUndecorated(true);
         setResizable(false);
 
         jLabel1.setText("Caracteres");
@@ -115,7 +114,8 @@ public class GenerarPassword extends javax.swing.JDialog {
         int seleccionCb = Integer.parseInt(numeroCaracteres);
         GenerarPasswordSeguro nuevoPassword = new GenerarPasswordSeguro();
         return nuevoPassword.generatePassword(seleccionCb);     
-    }    
+    } 
+
     /**
      * @param args the command line arguments
      */

@@ -243,7 +243,7 @@ public class AgregarPass extends javax.swing.JDialog {
 
     private void ver_password_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ver_password_btnActionPerformed
         if(ver_password_btn.isSelected())
-            contrasena_txt.setEchoChar('0');
+            contrasena_txt.setEchoChar((char) 0);
         else
             contrasena_txt.setEchoChar('*');
     }//GEN-LAST:event_ver_password_btnActionPerformed
