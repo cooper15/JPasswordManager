@@ -239,6 +239,7 @@ public class Principal extends javax.swing.JFrame {
         jtPasswords.setComponentPopupMenu(menuContextual);
         
         refrescar_tabla();
+        tooltip();
        
     }//GEN-LAST:event_formWindowOpened
     private boolean celdaPresionada(){
@@ -285,6 +286,12 @@ public class Principal extends javax.swing.JFrame {
        jtPasswords.getColumnModel().getColumn(2).setPreferredWidth(0);
     }
     
+    private void tooltip(){
+      bntNuevoPass.setToolTipText("Agregar");
+      bntVisualizarActualizar.setToolTipText("Editar");
+      refrescar_bnt.setToolTipText("Refrescar");
+      jtPasswords.setToolTipText("Seleccione una celda");
+    }
     
     private void bntVisualizarActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVisualizarActualizarActionPerformed
         int fila, columna;
