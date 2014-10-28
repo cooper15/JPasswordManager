@@ -211,33 +211,33 @@ public class AgregarPass extends javax.swing.JDialog {
 
     private void contrasena_txtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contrasena_txtMousePressed
         MenuContextual m = new MenuContextual();
-        m.menu_contextual(contrasena_txt);
+        m.menuContextual(contrasena_txt);
         contrasena_txt.requestFocus();
-        JPopupMenu nuevo_menu = m.menu_contextual(contrasena_txt);
+        JPopupMenu nuevo_menu = m.menuContextual(contrasena_txt);
         contrasena_txt.setComponentPopupMenu(nuevo_menu); 
     }//GEN-LAST:event_contrasena_txtMousePressed
 
     private void repita_contrass_txtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_repita_contrass_txtMousePressed
         MenuContextual m = new MenuContextual();
-        m.menu_contextual(repita_contrass_txt);
+        m.menuContextual(repita_contrass_txt);
         repita_contrass_txt.requestFocus();
-        JPopupMenu nuevo_menu = m.menu_contextual(repita_contrass_txt);
+        JPopupMenu nuevo_menu = m.menuContextual(repita_contrass_txt);
         repita_contrass_txt.setComponentPopupMenu(nuevo_menu);
     }//GEN-LAST:event_repita_contrass_txtMousePressed
 
     private void nombre_sitio_txtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nombre_sitio_txtMousePressed
         MenuContextual m = new MenuContextual();        
-        m.menu_contextual(nombre_sitio_txt);
+        m.menuContextual(nombre_sitio_txt);
         nombre_sitio_txt.requestFocus();
-        JPopupMenu nuevo_menu = m.menu_contextual(nombre_sitio_txt);
+        JPopupMenu nuevo_menu = m.menuContextual(nombre_sitio_txt);
         nombre_sitio_txt.setComponentPopupMenu(nuevo_menu);
     }//GEN-LAST:event_nombre_sitio_txtMousePressed
 
     private void url_sitio_txtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_url_sitio_txtMousePressed
         MenuContextual m = new MenuContextual();
-        m.menu_contextual(url_sitio_txt);
+        m.menuContextual(url_sitio_txt);
         url_sitio_txt.requestFocus();
-        JPopupMenu nuevo_menu = m.menu_contextual(url_sitio_txt);
+        JPopupMenu nuevo_menu = m.menuContextual(url_sitio_txt);
         url_sitio_txt.setComponentPopupMenu(nuevo_menu);    
     }//GEN-LAST:event_url_sitio_txtMousePressed
 

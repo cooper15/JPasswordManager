@@ -48,6 +48,7 @@ public class Principal extends javax.swing.JFrame {
         jmiSalir = new javax.swing.JMenuItem();
         jmEditar = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        generarMn = new javax.swing.JMenuItem();
 
         menuContextual.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -179,6 +180,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jmEditar.add(jMenuItem1);
+
+        generarMn.setText("Generar Password");
+        generarMn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generarMnActionPerformed(evt);
+            }
+        });
+        jmEditar.add(generarMn);
 
         jMenuBar1.add(jmEditar);
 
@@ -338,6 +347,11 @@ public class Principal extends javax.swing.JFrame {
         UtilidadesPassword password_segura = new UtilidadesPassword(this, true);
         password_segura.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void generarMnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarMnActionPerformed
+        GenerarPassword nuevoPassword = new GenerarPassword(this, true);
+        nuevoPassword.setVisible(true);
+    }//GEN-LAST:event_generarMnActionPerformed
     public void setNombreUsuario( String nombreUsuario){
         // Usuario logeado
         this.nombreUsuario = nombreUsuario;
@@ -379,6 +393,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton bntNuevoPass;
     private javax.swing.JButton bntVisualizarActualizar;
     private javax.swing.JLabel estado_lbl;
+    private javax.swing.JMenuItem generarMn;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;

@@ -27,32 +27,44 @@ import utilidades.InterfazAccionesClipboard;
  * @author cooper15
  */
 public class MenuContextual {
-        protected JPopupMenu menu_contextual(final javax.swing.JPasswordField pass_field){
-        JPopupMenu menu_contextual = new JPopupMenu();
+        protected JPopupMenu menuContextual(final javax.swing.JPasswordField passField){
+        JPopupMenu menuContextual = new JPopupMenu();
         JMenuItem menu_item = new JMenuItem("Pegar");
         menu_item.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-               pass_field.setText(pegar());
+               passField.setText(pegar());
             }
         }
         );
-        menu_contextual.add(menu_item);
-        return menu_contextual;
+        menuContextual.add(menu_item);
+        return menuContextual;
     }
     
-    protected JPopupMenu menu_contextual(final javax.swing.JTextField text_field){
-        JPopupMenu menu_contextual = new JPopupMenu();
-        JMenuItem menu_item = new JMenuItem("Pegar");
-        menu_item.addActionListener(new ActionListener() {
+    protected JPopupMenu menuContextual(final javax.swing.JTextField textField){
+        JPopupMenu menuContextual = new JPopupMenu();
+        JMenuItem pegar = new JMenuItem("Pegar");
+        pegar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-               text_field.setText(pegar());
+               textField.setText(pegar());
             }
         }
         );
-        menu_contextual.add(menu_item);
-        return menu_contextual;
+        JMenuItem copiar = new JMenuItem("Copiar");
+        copiar.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                copiar(textField.getText());
+            }
+        });
+        menuContextual.add(copiar);
+        menuContextual.add(pegar);
+        return menuContextual;
     }
     
+        private void copiar(String password){
+            InterfazAccionesClipboard copiar = new InterfazAccionesClipboard();
+            copiar.copy_to_clipboard(password);
+        }
+        
         private String pegar(){
         InterfazAccionesClipboard clipboard = new InterfazAccionesClipboard();
         return clipboard.paste_from_clipboard();
