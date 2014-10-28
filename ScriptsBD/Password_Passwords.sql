@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `Password` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `Password`;
--- MySQL dump 10.13  Distrib 5.5.38, for debian-linux-gnu (i686)
+-- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (i686)
 --
 -- Host: 127.0.0.1    Database: Password
 -- ------------------------------------------------------
--- Server version	5.5.38-0ubuntu0.14.04.1
+-- Server version	5.5.40-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,9 +30,9 @@ CREATE TABLE `Passwords` (
   `pass_Sitio` varchar(45) NOT NULL,
   `nom_Sitio` varchar(45) NOT NULL,
   `url_Sitio` varchar(45) NOT NULL,
-  PRIMARY KEY (`idPasswords`),
-  CONSTRAINT `tiene_pass` FOREIGN KEY (`idPasswords`) REFERENCES `Usuarios` (`idUsuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `fecha_vencimiento` date NOT NULL,
+  PRIMARY KEY (`idPasswords`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `Passwords` (
 
 LOCK TABLES `Passwords` WRITE;
 /*!40000 ALTER TABLE `Passwords` DISABLE KEYS */;
-INSERT INTO `Passwords` VALUES (1,'cooper15','master','diariodebian','diariodebian.com');
+INSERT INTO `Passwords` VALUES (20,'cooper15','cam','sitio','www.sitio.com','2014-10-15'),(27,'victor','Ki8sPF3Mxb/zAVghyKAwyQ==','misitio','misitio.com','2014-11-08'),(28,'manuel','c1vMRbMSrtUpFYc5qpOLfzqlahrmVtZQ','BancoCR','www.bancocrfi.com','2014-11-14');
 /*!40000 ALTER TABLE `Passwords` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-11 14:14:27
+-- Dump completed on 2014-10-27 21:58:18
