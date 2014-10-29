@@ -3,6 +3,7 @@ package ui;
 
 import conexiones.InterfazConexion;
 import cifrado.AccCifrado;
+import java.awt.HeadlessException;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 
@@ -187,45 +188,51 @@ public class EditarPass extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntAceptarPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAceptarPassActionPerformed
-       
+        editarDatos();  
+    }//GEN-LAST:event_bntAceptarPassActionPerformed
+
+    private void editarDatos() throws HeadlessException {
         String contrasena = new String ( txtContrasena.getPassword() );
-       
+        final String msjDatosVacios = "Existen datos vacíos, por favor rellene el formulario completo";
         if ( !validaDatos()  ){
             // llama codigo para insersión..
-            String diaMes = 
+            String diaMes =
                     Integer.toString(fechaDch.getCurrent().get(Calendar.DAY_OF_MONTH));
-            String mes = 
+            String mes =
                     Integer.toString(fechaDch.getCurrent().get(Calendar.MONTH) + 1);
-            String anio = 
+            String anio =
                     Integer.toString(fechaDch.getCurrent().get(Calendar.YEAR));
             String fecha = diaMes+"/"+mes+"/"+anio;
             
             JOptionPane.showMessageDialog(null,fecha);
             String datos = "'"+nombreUsuario+"'"+","+"'"+contrasena+"'"+","
-                            +"'"+txtNombreSitio.getText()+"'"+","+"'"
-                            +txtUrlSitio.getText()+"'";
+                    +"'"+txtNombreSitio.getText()+"'"+","+"'"
+                    +txtUrlSitio.getText()+"'";
             JOptionPane.showMessageDialog(null,datos);
             InterfazConexion nuevaConexion = new InterfazConexion();
             nuevaConexion.actualizaPassword(id, datos);
             this.dispose();
         }
         else
-          JOptionPane.showMessageDialog(this,"Existen datos vacíos, por favor rellene el formulario completo","Atención",JOptionPane.INFORMATION_MESSAGE);
-        
-    }//GEN-LAST:event_bntAceptarPassActionPerformed
+            JOptionPane.showMessageDialog(this, msjDatosVacios,"Atención",JOptionPane.INFORMATION_MESSAGE);
+    }
 
     private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContrasenaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        alAbrirVentana();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void alAbrirVentana() {
         AccCifrado descifrar = new AccCifrado();
         contrasenaSitio = descifrar.descifrar_password(contrasenaSitio);
         txtUsuario.setText(nombreUsuario);
         txtContrasena.setText(contrasenaSitio);
         txtNombreSitio.setText(nombreSitio);
         txtUrlSitio.setText(urlSitio);
-    }//GEN-LAST:event_formWindowOpened
+    }
 
     private void ver_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ver_btnActionPerformed
         if(ver_btn.isSelected())
@@ -244,17 +251,6 @@ public class EditarPass extends javax.swing.JDialog {
                vacio = true;
         return vacio;
     }
-    
-  /*  private boolean coincidePasswords(){
-        boolean coincide = false;
-        String contrasena1 = new String ( txtUsuario.getPassword() );
-        String contrasena2 = new String ( txtContrasena.getPassword() );   
-        
-        if (contrasena1.equals(contrasena2))
-            coincide = true;
-
-        return coincide;
-    }*/
     /**
      * @param args the command line arguments
      */

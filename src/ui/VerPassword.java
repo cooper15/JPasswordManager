@@ -40,8 +40,8 @@ public class VerPassword extends javax.swing.JDialog {
         menu_item_copiar = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         aceptar_btn = new javax.swing.JButton();
-        ver_password_txt = new javax.swing.JPasswordField();
-        ver_password_btn = new javax.swing.JToggleButton();
+        verPasswordTxt = new javax.swing.JPasswordField();
+        verPasswordBtn = new javax.swing.JToggleButton();
 
         menu_contextual.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -75,16 +75,16 @@ public class VerPassword extends javax.swing.JDialog {
             }
         });
 
-        ver_password_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+        verPasswordTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                ver_password_txtMousePressed(evt);
+                verPasswordTxtMousePressed(evt);
             }
         });
 
-        ver_password_btn.setText("V");
-        ver_password_btn.addActionListener(new java.awt.event.ActionListener() {
+        verPasswordBtn.setText("V");
+        verPasswordBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ver_password_btnActionPerformed(evt);
+                verPasswordBtnActionPerformed(evt);
             }
         });
 
@@ -98,9 +98,9 @@ public class VerPassword extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(ver_password_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(verPasswordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ver_password_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(verPasswordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(aceptar_btn))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -110,8 +110,8 @@ public class VerPassword extends javax.swing.JDialog {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(ver_password_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ver_password_btn))
+                    .addComponent(verPasswordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(verPasswordBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(aceptar_btn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -126,24 +126,24 @@ public class VerPassword extends javax.swing.JDialog {
 
     private void menu_item_copiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_item_copiarActionPerformed
       InterfazAccionesClipboard acciones = new InterfazAccionesClipboard();
-      String password_a_copiar = ver_password_txt.getSelectedText();
-      acciones.copy_to_clipboard(password_a_copiar);
+      String passwordCopiar = verPasswordTxt.getSelectedText();
+      acciones.copy_to_clipboard(passwordCopiar);
     }//GEN-LAST:event_menu_item_copiarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        ver_password_txt.setText(password);
+        verPasswordTxt.setText(password);
     }//GEN-LAST:event_formWindowOpened
 
-    private void ver_password_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ver_password_btnActionPerformed
-        if(ver_password_btn.isSelected())
-            ver_password_txt.setEchoChar((char) 0);
+    private void verPasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPasswordBtnActionPerformed
+        if(verPasswordBtn.isSelected())
+            verPasswordTxt.setEchoChar((char) 0);
         else
-            ver_password_txt.setEchoChar('*');
-    }//GEN-LAST:event_ver_password_btnActionPerformed
+            verPasswordTxt.setEchoChar('*');
+    }//GEN-LAST:event_verPasswordBtnActionPerformed
 
-    private void ver_password_txtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ver_password_txtMousePressed
-        ver_password_txt.setComponentPopupMenu(menu_contextual);
-    }//GEN-LAST:event_ver_password_txtMousePressed
+    private void verPasswordTxtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verPasswordTxtMousePressed
+        verPasswordTxt.setComponentPopupMenu(menu_contextual);
+    }//GEN-LAST:event_verPasswordTxtMousePressed
 
     private void aceptar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptar_btnActionPerformed
        this.dispose();
@@ -196,7 +196,7 @@ public class VerPassword extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPopupMenu menu_contextual;
     private javax.swing.JMenuItem menu_item_copiar;
-    private javax.swing.JToggleButton ver_password_btn;
-    private javax.swing.JPasswordField ver_password_txt;
+    private javax.swing.JToggleButton verPasswordBtn;
+    private javax.swing.JPasswordField verPasswordTxt;
     // End of variables declaration//GEN-END:variables
 }

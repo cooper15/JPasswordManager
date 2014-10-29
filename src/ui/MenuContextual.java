@@ -29,14 +29,14 @@ import utilidades.InterfazAccionesClipboard;
 public class MenuContextual {
         protected JPopupMenu menuContextual(final javax.swing.JPasswordField passField){
         JPopupMenu menuContextual = new JPopupMenu();
-        JMenuItem menu_item = new JMenuItem("Pegar");
-        menu_item.addActionListener(new ActionListener() {
+        JMenuItem menuItem = new JMenuItem("Pegar");
+        menuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                passField.setText(pegar());
             }
         }
         );
-        menuContextual.add(menu_item);
+        menuContextual.add(menuItem);
         return menuContextual;
     }
     

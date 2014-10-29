@@ -276,9 +276,7 @@ public class AgregarPass extends javax.swing.JDialog {
             coincide = true;
         return coincide;
     }
-
     
-
     /**
      * @param args the command line arguments
      */
