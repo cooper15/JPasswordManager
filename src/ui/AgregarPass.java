@@ -3,6 +3,7 @@ package ui;
 
 import conexiones.InterfazConexion;
 import cifrado.AccCifrado;
+import java.awt.HeadlessException;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -17,7 +18,7 @@ public class AgregarPass extends javax.swing.JDialog {
      * Creates new form AgregarPass
      */
 
-    String nombre_usuario;
+    String nombreUsuario;
     public AgregarPass(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -42,14 +43,14 @@ public class AgregarPass extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jpTextos = new javax.swing.JPanel();
-        contrasena_txt = new javax.swing.JPasswordField();
-        repita_contrass_txt = new javax.swing.JPasswordField();
-        nombre_sitio_txt = new javax.swing.JTextField();
-        url_sitio_txt = new javax.swing.JTextField();
+        contrasenaTxt = new javax.swing.JPasswordField();
+        repitaContrasenaTxt = new javax.swing.JPasswordField();
+        nombreSitioTxt = new javax.swing.JTextField();
+        urlSitioTxt = new javax.swing.JTextField();
         fechaDch = new datechooser.beans.DateChooserCombo();
         jpBotones = new javax.swing.JPanel();
         bntAceptarPass = new javax.swing.JButton();
-        ver_password_btn = new javax.swing.JToggleButton();
+        verPasswordBtn = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Contraseña");
@@ -78,33 +79,33 @@ public class AgregarPass extends javax.swing.JDialog {
 
         jpTextos.setLayout(new java.awt.GridLayout(5, 0, 0, 20));
 
-        contrasena_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+        contrasenaTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                contrasena_txtMousePressed(evt);
+                contrasenaTxtMousePressed(evt);
             }
         });
-        jpTextos.add(contrasena_txt);
+        jpTextos.add(contrasenaTxt);
 
-        repita_contrass_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+        repitaContrasenaTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                repita_contrass_txtMousePressed(evt);
+                repitaContrasenaTxtMousePressed(evt);
             }
         });
-        jpTextos.add(repita_contrass_txt);
+        jpTextos.add(repitaContrasenaTxt);
 
-        nombre_sitio_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+        nombreSitioTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                nombre_sitio_txtMousePressed(evt);
+                nombreSitioTxtMousePressed(evt);
             }
         });
-        jpTextos.add(nombre_sitio_txt);
+        jpTextos.add(nombreSitioTxt);
 
-        url_sitio_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+        urlSitioTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                url_sitio_txtMousePressed(evt);
+                urlSitioTxtMousePressed(evt);
             }
         });
-        jpTextos.add(url_sitio_txt);
+        jpTextos.add(urlSitioTxt);
 
         try {
             fechaDch.setDefaultPeriods(new datechooser.model.multiple.PeriodSet());
@@ -139,10 +140,10 @@ public class AgregarPass extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        ver_password_btn.setText("V");
-        ver_password_btn.addActionListener(new java.awt.event.ActionListener() {
+        verPasswordBtn.setText("V");
+        verPasswordBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ver_password_btnActionPerformed(evt);
+                verPasswordBtnActionPerformed(evt);
             }
         });
 
@@ -157,7 +158,7 @@ public class AgregarPass extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jpFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ver_password_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(verPasswordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -167,7 +168,7 @@ public class AgregarPass extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(ver_password_btn)
+                        .addComponent(verPasswordBtn)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jpBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,92 +179,97 @@ public class AgregarPass extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntAceptarPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAceptarPassActionPerformed
-        String contrasena = new String ( contrasena_txt.getPassword() );
-            if (!valida_datos() && coincide_passwords()){
-                AccCifrado cifrar = new AccCifrado();
-                contrasena = cifrar.cifrar_password(contrasena);
+        agregarPassword();
+    }//GEN-LAST:event_bntAceptarPassActionPerformed
+
+    private void agregarPassword() throws HeadlessException {
+        String contrasena = new String ( contrasenaTxt.getPassword() );
+        if (!datosVacios() && coincidePassword()){
+            AccCifrado cifrar = new AccCifrado();
+            contrasena = cifrar.cifrar_password(contrasena);
             // llama codigo para insersión..
-                String dia_mes = 
-                        Integer.toString(fechaDch.getCurrent().get(Calendar.DAY_OF_MONTH));
-                String mes = 
-                        Integer.toString(fechaDch.getCurrent().get(Calendar.MONTH ) +1);
-                String anio = 
-                        Integer.toString(fechaDch.getCurrent().get(Calendar.YEAR));
-                String fecha = "'"+anio+"-"+mes+"-"+dia_mes+"'";
-                String datos = "'"+nombre_usuario+"'"+","+"'"+contrasena+"'"+","
-                         +"'"+nombre_sitio_txt.getText()+"'"+","
-                         +"'"+url_sitio_txt.getText()+"'"+","+fecha;
-                JOptionPane.showMessageDialog(null,datos);
-                InterfazConexion nueva_conexion = new InterfazConexion();
-                nueva_conexion.ingresaPassword(datos);
-                this.dispose();
+            String dia_mes =
+                    Integer.toString(fechaDch.getCurrent().get(Calendar.DAY_OF_MONTH));
+            String mes =
+                    Integer.toString(fechaDch.getCurrent().get(Calendar.MONTH ) +1);
+            String anio =
+                    Integer.toString(fechaDch.getCurrent().get(Calendar.YEAR));
+            String fecha = "'"+anio+"-"+mes+"-"+dia_mes+"'";
+            String datos = "'"+nombreUsuario+"'"+","+"'"+contrasena+"'"+","
+                    +"'"+nombreSitioTxt.getText()+"'"+","
+                    +"'"+urlSitioTxt.getText()+"'"+","+fecha;
+            JOptionPane.showMessageDialog(null,datos);
+            InterfazConexion nueva_conexion = new InterfazConexion();
+            nueva_conexion.ingresaPassword(datos);
+            this.dispose();
         }
-            else 
-                if( !coincide_passwords() )
-                    JOptionPane.showMessageDialog(this,"Las contraseñas no coinciden");
-        
+        else
+            if( !coincidePassword() )
+                JOptionPane.showMessageDialog(this,"Las contraseñas no coinciden");
+            
             else
                 JOptionPane.showMessageDialog(this,"Existen datos vacíos, "
                         +"por favor rellene el formulario completo","Atención",
                         JOptionPane.INFORMATION_MESSAGE);
-        
-    }//GEN-LAST:event_bntAceptarPassActionPerformed
+    }
 
-    private void contrasena_txtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contrasena_txtMousePressed
+    private void contrasenaTxtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contrasenaTxtMousePressed
         MenuContextual m = new MenuContextual();
-        m.menuContextual(contrasena_txt);
-        contrasena_txt.requestFocus();
-        JPopupMenu nuevo_menu = m.menuContextual(contrasena_txt);
-        contrasena_txt.setComponentPopupMenu(nuevo_menu); 
-    }//GEN-LAST:event_contrasena_txtMousePressed
+        m.menuContextual(contrasenaTxt);
+        contrasenaTxt.requestFocus();
+        JPopupMenu nuevoMenu = m.menuContextual(contrasenaTxt);
+        contrasenaTxt.setComponentPopupMenu(nuevoMenu); 
+    }//GEN-LAST:event_contrasenaTxtMousePressed
 
-    private void repita_contrass_txtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_repita_contrass_txtMousePressed
+    private void repitaContrasenaTxtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_repitaContrasenaTxtMousePressed
         MenuContextual m = new MenuContextual();
-        m.menuContextual(repita_contrass_txt);
-        repita_contrass_txt.requestFocus();
-        JPopupMenu nuevo_menu = m.menuContextual(repita_contrass_txt);
-        repita_contrass_txt.setComponentPopupMenu(nuevo_menu);
-    }//GEN-LAST:event_repita_contrass_txtMousePressed
+        m.menuContextual(repitaContrasenaTxt);
+        repitaContrasenaTxt.requestFocus();
+        JPopupMenu nuevoMenu = m.menuContextual(repitaContrasenaTxt);
+        repitaContrasenaTxt.setComponentPopupMenu(nuevoMenu);
+    }//GEN-LAST:event_repitaContrasenaTxtMousePressed
 
-    private void nombre_sitio_txtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nombre_sitio_txtMousePressed
+    private void nombreSitioTxtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nombreSitioTxtMousePressed
         MenuContextual m = new MenuContextual();        
-        m.menuContextual(nombre_sitio_txt);
-        nombre_sitio_txt.requestFocus();
-        JPopupMenu nuevo_menu = m.menuContextual(nombre_sitio_txt);
-        nombre_sitio_txt.setComponentPopupMenu(nuevo_menu);
-    }//GEN-LAST:event_nombre_sitio_txtMousePressed
+        m.menuContextual(nombreSitioTxt);
+        nombreSitioTxt.requestFocus();
+        JPopupMenu nuevoMenu = m.menuContextual(nombreSitioTxt);
+        nombreSitioTxt.setComponentPopupMenu(nuevoMenu);
+    }//GEN-LAST:event_nombreSitioTxtMousePressed
 
-    private void url_sitio_txtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_url_sitio_txtMousePressed
+    private void urlSitioTxtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_urlSitioTxtMousePressed
         MenuContextual m = new MenuContextual();
-        m.menuContextual(url_sitio_txt);
-        url_sitio_txt.requestFocus();
-        JPopupMenu nuevo_menu = m.menuContextual(url_sitio_txt);
-        url_sitio_txt.setComponentPopupMenu(nuevo_menu);    
-    }//GEN-LAST:event_url_sitio_txtMousePressed
+        m.menuContextual(urlSitioTxt);
+        urlSitioTxt.requestFocus();
+        JPopupMenu nuevoMenu = m.menuContextual(urlSitioTxt);
+        urlSitioTxt.setComponentPopupMenu(nuevoMenu);    
+    }//GEN-LAST:event_urlSitioTxtMousePressed
 
-    private void ver_password_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ver_password_btnActionPerformed
-        if(ver_password_btn.isSelected())
-            contrasena_txt.setEchoChar((char) 0);
+    private void verPasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPasswordBtnActionPerformed
+        if(verPasswordBtn.isSelected())
+            contrasenaTxt.setEchoChar((char) 0);
         else
-            contrasena_txt.setEchoChar('*');
-    }//GEN-LAST:event_ver_password_btnActionPerformed
+            contrasenaTxt.setEchoChar('*');
+    }//GEN-LAST:event_verPasswordBtnActionPerformed
 
-    private boolean valida_datos(){
+    private boolean datosVacios(){
         boolean vacio = false;
-        String contrasena1 = new String (contrasena_txt.getPassword());
-        String contrasena2 = new String (repita_contrass_txt.getPassword());
-           if (contrasena1.equals("") || contrasena2.equals("")
-                || nombre_sitio_txt.getText().equals("")  || url_sitio_txt.getText().equals("")
-                )
-               vacio = true;
-           
+        String contrasena1 = new String(contrasenaTxt.getPassword());
+        String contrasena2 = new String(repitaContrasenaTxt.getPassword());
+        final boolean nombreSitioIgual = nombreSitioTxt.getText().equals("");
+        final boolean urlSitioIgual = urlSitioTxt.getText().equals("");
+        final boolean contrasenaDosIgual = contrasena2.equals("");
+        final boolean contrasenaIgual = contrasena1.equals("");
+        if (contrasenaIgual || contrasenaDosIgual 
+           || nombreSitioIgual  || urlSitioIgual)
+            vacio = true;     
         return vacio;
     }
 
-    private boolean coincide_passwords(){
+    private boolean coincidePassword(){
         boolean coincide = false;
-        String contrasena1 = new String ( contrasena_txt.getPassword() );
-        String contrasena2 = new String ( repita_contrass_txt.getPassword() );   
+        String contrasena1 = new String(contrasenaTxt.getPassword());
+        String contrasena2 = new String(repitaContrasenaTxt.getPassword());   
         if (contrasena1.equals(contrasena2))
             coincide = true;
         return coincide;
@@ -281,7 +287,7 @@ public class AgregarPass extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public void setNombreUsuario(String nombreUsuario){
-        this.nombre_usuario = nombreUsuario;
+        this.nombreUsuario = nombreUsuario;
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -296,15 +302,11 @@ public class AgregarPass extends javax.swing.JDialog {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgregarPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgregarPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgregarPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AgregarPass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the dialog */
@@ -324,7 +326,7 @@ public class AgregarPass extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAceptarPass;
-    private javax.swing.JPasswordField contrasena_txt;
+    private javax.swing.JPasswordField contrasenaTxt;
     private datechooser.beans.DateChooserCombo fechaDch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -335,9 +337,9 @@ public class AgregarPass extends javax.swing.JDialog {
     private javax.swing.JPanel jpFormulario;
     private javax.swing.JPanel jpLabels;
     private javax.swing.JPanel jpTextos;
-    private javax.swing.JTextField nombre_sitio_txt;
-    private javax.swing.JPasswordField repita_contrass_txt;
-    private javax.swing.JTextField url_sitio_txt;
-    private javax.swing.JToggleButton ver_password_btn;
+    private javax.swing.JTextField nombreSitioTxt;
+    private javax.swing.JPasswordField repitaContrasenaTxt;
+    private javax.swing.JTextField urlSitioTxt;
+    private javax.swing.JToggleButton verPasswordBtn;
     // End of variables declaration//GEN-END:variables
 }

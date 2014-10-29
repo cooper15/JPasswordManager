@@ -32,7 +32,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jpFormulario" min="-2" pref="339" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="ver_password_btn" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="verPasswordBtn" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -46,7 +46,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jpFormulario" pref="210" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="ver_password_btn" min="-2" max="-2" attributes="0"/>
+                      <Component id="verPasswordBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -116,24 +116,24 @@
             <Property name="verticalGap" type="int" value="20"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JPasswordField" name="contrasena_txt">
+            <Component class="javax.swing.JPasswordField" name="contrasenaTxt">
               <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="contrasena_txtMousePressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="contrasenaTxtMousePressed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="repita_contrass_txt">
+            <Component class="javax.swing.JPasswordField" name="repitaContrasenaTxt">
               <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="repita_contrass_txtMousePressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="repitaContrasenaTxtMousePressed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="nombre_sitio_txt">
+            <Component class="javax.swing.JTextField" name="nombreSitioTxt">
               <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nombre_sitio_txtMousePressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nombreSitioTxtMousePressed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="url_sitio_txt">
+            <Component class="javax.swing.JTextField" name="urlSitioTxt">
               <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="url_sitio_txtMousePressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="urlSitioTxtMousePressed"/>
               </Events>
             </Component>
             <Component class="datechooser.beans.DateChooserCombo" name="fechaDch">
@@ -180,12 +180,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JToggleButton" name="ver_password_btn">
+    <Component class="javax.swing.JToggleButton" name="verPasswordBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="V"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ver_password_btnActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="verPasswordBtnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
