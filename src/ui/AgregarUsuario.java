@@ -13,7 +13,7 @@ public class AgregarUsuario extends javax.swing.JDialog {
     /**
      * Creates new form AgregarUsuario
      */
-    public AgregarUsuario(java.awt.Frame parent, boolean modal) {
+    public AgregarUsuario(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setResizable(false);
@@ -137,18 +137,22 @@ public class AgregarUsuario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntAgregarUsuariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAgregarUsuariActionPerformed
+        agregarUsuario();      
+    }//GEN-LAST:event_bntAgregarUsuariActionPerformed
+
+    private void agregarUsuario() {
         String contrasena = new String (jtContrasena.getPassword());
         if( !validaDatos() && coincidePasswords() ){
             String datosObtenidos = "'" + jtNombreUsuario.getText() + "'" + ","
-                                  + "'" + this.cifraPassword() + "'"; 
+                    + "'" + this.cifraPassword() + "'";
             InterfazConexion conectar = new InterfazConexion();
             conectar.ingresarDatosUsuario(datosObtenidos);
             this.dispose();
         }
-        else 
+        else
             if (!coincidePasswords())
-                lblCoincide.setText("Las contraseñas no coinciden");      
-    }//GEN-LAST:event_bntAgregarUsuariActionPerformed
+                lblCoincide.setText("Las contraseñas no coinciden");
+    }
 
     private void bntCancelarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarUsuarioActionPerformed
         this.dispose();
@@ -164,10 +168,8 @@ public class AgregarUsuario extends javax.swing.JDialog {
         boolean vacio = false;
         String contrasena = new String ( jtContrasena.getPassword() );
         String repitaContrasena = new String ( jtRepitaContrasena.getPassword() );
-        
         if ( contrasena.equals("") | jtNombreUsuario.getText().equals("") | repitaContrasena.equals("") )
             return true;
-        
         return vacio;
     }
     private boolean coincidePasswords(){
@@ -212,7 +214,7 @@ public class AgregarUsuario extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AgregarUsuario dialog = new AgregarUsuario(new javax.swing.JFrame(), true);
+                AgregarUsuario dialog = new AgregarUsuario(new javax.swing.JDialog(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

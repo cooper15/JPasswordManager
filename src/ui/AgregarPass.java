@@ -187,30 +187,32 @@ public class AgregarPass extends javax.swing.JDialog {
         if (!datosVacios() && coincidePassword()){
             AccCifrado cifrar = new AccCifrado();
             contrasena = cifrar.cifrar_password(contrasena);
-            // llama codigo para insersión..
-            String dia_mes =
-                    Integer.toString(fechaDch.getCurrent().get(Calendar.DAY_OF_MONTH));
-            String mes =
-                    Integer.toString(fechaDch.getCurrent().get(Calendar.MONTH ) +1);
-            String anio =
-                    Integer.toString(fechaDch.getCurrent().get(Calendar.YEAR));
-            String fecha = "'"+anio+"-"+mes+"-"+dia_mes+"'";
+            String fecha = obtieneFecha();
             String datos = "'"+nombreUsuario+"'"+","+"'"+contrasena+"'"+","
-                    +"'"+nombreSitioTxt.getText()+"'"+","
-                    +"'"+urlSitioTxt.getText()+"'"+","+fecha;
-            JOptionPane.showMessageDialog(null,datos);
-            InterfazConexion nueva_conexion = new InterfazConexion();
-            nueva_conexion.ingresaPassword(datos);
+                         + "'"+nombreSitioTxt.getText()+"'"+","
+                         + "'"+urlSitioTxt.getText()+"'"+","+fecha;
+            InterfazConexion nuevaConexion = new InterfazConexion();
+            nuevaConexion.ingresaPassword(datos);
             this.dispose();
         }
         else
-            if( !coincidePassword() )
+            if(!coincidePassword())
                 JOptionPane.showMessageDialog(this,"Las contraseñas no coinciden");
-            
             else
                 JOptionPane.showMessageDialog(this,"Existen datos vacíos, "
                         +"por favor rellene el formulario completo","Atención",
                         JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private String obtieneFecha() {
+        final int obtieneDia = fechaDch.getCurrent().get(Calendar.DAY_OF_MONTH);
+        final int obtieneAnio = fechaDch.getCurrent().get(Calendar.YEAR);
+        final int obtieneMes = fechaDch.getCurrent().get(Calendar.MONTH ) +1;
+        String diaMes =Integer.toString(obtieneDia);
+        String mes =Integer.toString(obtieneMes);
+        String anio =Integer.toString(obtieneAnio);
+        String fecha = "'"+anio+"-"+mes+"-"+diaMes+"'";
+        return fecha;
     }
 
     private void contrasenaTxtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contrasenaTxtMousePressed

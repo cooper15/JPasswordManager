@@ -3,6 +3,7 @@ package conexiones;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -35,6 +36,24 @@ public class InterfazConexion {
         catch(SQLException e){
         }
         return datos;
+    }
+    
+    public void llenaTabla(DefaultTableModel modeloTabla, String nombreUsuario){
+        ResultSet resultado = ObtieneDatosPassword(nombreUsuario);
+        String nombreColumnas [] = {"id", "Usuario", "Contraseña", "Nombre sitio", "URL sitio","Vencimiento"};
+        for (int i=0; i<=5; i++)
+            modeloTabla.addColumn(nombreColumnas[i]);
+        try{
+            // coloca los campos obtenidos con el resultset dentro de la tabla. 
+            while(resultado.next()){
+                 Object[] fila = new Object[6];
+                 for (int i = 0; i < 6; i++) 
+                    fila[i]=resultado.getObject(i+1);
+            modeloTabla.addRow(fila);
+            }
+        }
+        catch(Exception e){
+        }
     }
         
     public void ingresaPassword(String datos){
