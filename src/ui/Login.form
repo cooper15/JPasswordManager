@@ -148,6 +148,11 @@
         <Component class="javax.swing.JTextField" name="jtUsuarioLogin">
         </Component>
         <Component class="javax.swing.JLabel" name="lblErrorLogin">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ea" green="f9" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

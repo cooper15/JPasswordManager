@@ -1,6 +1,8 @@
 
 package ui;
 
+
+import calendario.FechaActual;
 import conexiones.InterfazConexion;
 import cifrado.AccCifrado;
 import javax.swing.JOptionPane;
@@ -17,7 +19,9 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.clavesVencidasAtf.setEditable(false);
     }
 
     /**
@@ -32,6 +36,10 @@ public class Principal extends javax.swing.JFrame {
         menuContextual = new javax.swing.JPopupMenu();
         menuContextualEliminar = new javax.swing.JMenuItem();
         menu_contextual_ver_Pass = new javax.swing.JMenuItem();
+        ClavesVencidas = new javax.swing.JDialog();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        clavesVencidasAtf = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         bntNuevoPass = new javax.swing.JButton();
         bntVisualizarActualizar = new javax.swing.JButton();
@@ -68,6 +76,45 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         menuContextual.add(menu_contextual_ver_Pass);
+
+        ClavesVencidas.setTitle("Claves vencidas");
+        ClavesVencidas.setMinimumSize(new java.awt.Dimension(350, 230));
+        ClavesVencidas.setModal(true);
+        ClavesVencidas.setResizable(false);
+
+        clavesVencidasAtf.setColumns(20);
+        clavesVencidasAtf.setRows(5);
+        jScrollPane2.setViewportView(clavesVencidasAtf);
+
+        jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ClavesVencidasLayout = new javax.swing.GroupLayout(ClavesVencidas.getContentPane());
+        ClavesVencidas.getContentPane().setLayout(ClavesVencidasLayout);
+        ClavesVencidasLayout.setHorizontalGroup(
+            ClavesVencidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ClavesVencidasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(ClavesVencidasLayout.createSequentialGroup()
+                .addGap(134, 134, 134)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        ClavesVencidasLayout.setVerticalGroup(
+            ClavesVencidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ClavesVencidasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestor de contraseñas");
@@ -217,7 +264,7 @@ public class Principal extends javax.swing.JFrame {
         jtPasswords.setComponentPopupMenu(menuContextual);     
         refrescarTabla();
         tooltip();
-       
+        calculaFechaVencimiento();
     }//GEN-LAST:event_formWindowOpened
     private boolean celdaPresionada(){
         boolean presionada = false;
@@ -229,6 +276,53 @@ public class Principal extends javax.swing.JFrame {
     
     }
     
+    private boolean comparaFecha(int numFila){
+        FechaActual  obtieneFechaV = new FechaActual();
+        int diaMes = obtieneFechaV.getDiaMes();
+        int mesAnio = obtieneFechaV.getMesAnio();
+        int anio = obtieneFechaV.getAnio();
+        String fechaActual = anio+"-"+mesAnio+"-"+diaMes;
+        String fechaV = jtPasswords.getModel().getValueAt(numFila, 5).toString();
+        String anioA = "";
+        String anioV = "";
+        String mesAnioA = "";
+        String mesAnioV = "";
+        String diaMesA = "";
+        String diaMesV = "";
+        for(int i = 0; i < 4; i++){
+            anioA += fechaActual.charAt(i);
+            anioV += fechaV.charAt(i);
+        }
+        for(int i = 5; i < 8; i++){
+            mesAnioA += fechaActual.charAt(i);
+            mesAnioV += fechaV.charAt(i);
+        }
+        for(int i = 8; i < 10; i++){
+            diaMesA += fechaActual.charAt(i);
+            diaMesV += fechaV.charAt(i);
+        }
+        int diaMesVe = Integer.parseInt(anioV);
+        boolean valor;
+        if(anioA.equals(anioV) && mesAnioA.equals(mesAnioV)){
+            if(diaMesA.equals(diaMesV))
+                return true;
+            if(diaMes > diaMesVe)
+                return true;
+        }
+ 
+        return false; // por defecto ninguna fecha está vencida.
+    }
+    private void calculaFechaVencimiento(){
+        int arrayVencidas [] = {};
+        String vencidas = "";
+        for(int i = 0; i < cantidadFilas(); i++){
+            if (comparaFecha(i))
+                vencidas += "\n"+jtPasswords.getModel().getValueAt(i, 3);
+        }
+        this.clavesVencidasAtf.setText("Las siguientes claves están vencidas, renuévelas: \n"+vencidas);
+        this.ClavesVencidas.setLocationRelativeTo(this);
+        this.ClavesVencidas.setVisible(true);
+    }
     private void refrescarTabla(){
         DefaultTableModel modeloTabla = new DefaultTableModel();
         this.jtPasswords.setModel(modeloTabla);     
@@ -276,14 +370,18 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No selecionó ninguna celda");
         else{
             InterfazConexion inte_con = new InterfazConexion();
-            int fila = numero_fila();
+            int fila = numeroFila();
             String id = jtPasswords.getModel().getValueAt(fila, 0).toString();
             inte_con.eliminar_password(id);
             estadoLbl.setText("Contraseña eliminada");
         }       
     }//GEN-LAST:event_menuContextualEliminarMousePressed
 
-    private int numero_fila(){
+    private int cantidadFilas(){
+        return jtPasswords.getModel().getRowCount();
+    }
+    
+    private int numeroFila(){
         return jtPasswords.getSelectedRow();
     }
     private void refrescar_bntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refrescar_bntActionPerformed
@@ -293,7 +391,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void menu_contextual_ver_PassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_contextual_ver_PassActionPerformed
         if (celdaPresionada()){
-            int fila = numero_fila();
+            int fila = numeroFila();
             String pass_a_copiar = jtPasswords.getModel().getValueAt(fila, 2).toString();
             VerPassword ver_password = new VerPassword(this, true);
             AccCifrado descifrar = new AccCifrado();
@@ -314,6 +412,10 @@ public class Principal extends javax.swing.JFrame {
         GenerarPassword nuevoPassword = new GenerarPassword(this, true);
         nuevoPassword.setVisible(true);
     }//GEN-LAST:event_generarMnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.ClavesVencidas.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
     public void setNombreUsuario( String nombreUsuario){
         // Usuario logeado
         this.nombreUsuario = nombreUsuario;
@@ -352,13 +454,17 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog ClavesVencidas;
     private javax.swing.JButton bntNuevoPass;
     private javax.swing.JButton bntVisualizarActualizar;
+    private javax.swing.JTextArea clavesVencidasAtf;
     private javax.swing.JLabel estadoLbl;
     private javax.swing.JMenuItem generarMn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenu jmArchivo;
     private javax.swing.JMenu jmEditar;
