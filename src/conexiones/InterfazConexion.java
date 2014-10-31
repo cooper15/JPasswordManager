@@ -21,6 +21,15 @@ public class InterfazConexion {
     public void ingresarDatosUsuario(String datos){
         Conexion conexionDatos = new Conexion();
         conexionDatos.insertarUsuario(datos);
+        cierraConexion(conexionDatos);
+    }
+
+    private void cierraConexion(Conexion conexionDatos) {
+        try{
+            conexionDatos.getConexion().close();
+        }
+        catch(SQLException e){
+        } 
     }
     
     public String ObtieneDatosUsuario(String usuario){
@@ -59,11 +68,13 @@ public class InterfazConexion {
     public void ingresaPassword(String datos){
         Conexion conexionDatos = new Conexion();
         conexionDatos.insertarPassword(datos);
+        cierraConexion(conexionDatos);
     }
     
     public void actualizaPassword(int id, String datos){
         Conexion conexionDatos = new Conexion();
         conexionDatos.actualizarPassword(id, datos);
+        cierraConexion(conexionDatos);
     }
     
     public ResultSet ObtieneDatosPassword(String usuario){
@@ -74,8 +85,9 @@ public class InterfazConexion {
     }
     
     public void eliminar_password(String id){
-        Conexion nueva_conexion = new Conexion();
-        nueva_conexion.elinina_password(id);
+        Conexion nuevaConexion = new Conexion();
+        nuevaConexion.elinina_password(id);
+        cierraConexion(nuevaConexion);
     }
 }
     
