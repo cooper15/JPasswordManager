@@ -41,7 +41,7 @@ public class CalculaVencimiento {
             anioA += fechaActual.charAt(i);
             anioV += fechaV.charAt(i);
         }
-        for(int i = 5; i < 8; i++){
+        for(int i = 5; i < 7; i++){
             mesAnioA += fechaActual.charAt(i);
             mesAnioV += fechaV.charAt(i);
         }

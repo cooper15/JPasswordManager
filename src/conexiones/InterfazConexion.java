@@ -25,6 +25,7 @@ public class InterfazConexion {
     }
 
     private void cierraConexion(Conexion conexionDatos) {
+        /*Cierra las conexiones abiertas con la base de datos*/
         try{
             conexionDatos.getConexion().close();
         }
@@ -33,6 +34,7 @@ public class InterfazConexion {
     }
     
     public String ObtieneDatosUsuario(String usuario){
+        /*Obtiene nombre y contraseña para ser comparadas en login*/
         String datos = "";  
         Conexion conexionDatos = new Conexion();
         ResultSet Resultado = conexionDatos.obtieneUsuarioPass(usuario);
@@ -44,6 +46,7 @@ public class InterfazConexion {
         }
         catch(SQLException e){
         }
+        cierraConexion(conexionDatos);
         return datos;
     }
     
@@ -78,7 +81,8 @@ public class InterfazConexion {
     }
     
     public ResultSet ObtieneDatosPassword(String usuario){
-        ResultSet resultado = null;
+        /*Este metodo obtiene los datos para llenar la tabla*/
+        ResultSet resultado;
         Conexion nuevaConexion = new Conexion();
         resultado = nuevaConexion.obtienePass(usuario);
         return resultado;
