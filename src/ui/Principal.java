@@ -2,11 +2,11 @@
 package ui;
 
 
-import calendario.FechaActual;
 import conexiones.InterfazConexion;
 import cifrado.AccCifrado;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import calendario.CalculaVencimiento;
 
 /**
  *
@@ -276,50 +276,12 @@ public class Principal extends javax.swing.JFrame {
     
     }
     
-    private boolean comparaFecha(int numFila){
-        FechaActual  obtieneFechaV = new FechaActual();
-        int diaMes = obtieneFechaV.getDiaMes();
-        int mesAnio = obtieneFechaV.getMesAnio();
-        int anio = obtieneFechaV.getAnio();
-        String fechaActual = anio+"-"+mesAnio+"-"+diaMes;
-        String fechaV = jtPasswords.getModel().getValueAt(numFila, 5).toString();
-        String anioA = "";
-        String anioV = "";
-        String mesAnioA = "";
-        String mesAnioV = "";
-        String diaMesA = "";
-        String diaMesV = "";
-        for(int i = 0; i < 4; i++){
-            anioA += fechaActual.charAt(i);
-            anioV += fechaV.charAt(i);
-        }
-        for(int i = 5; i < 8; i++){
-            mesAnioA += fechaActual.charAt(i);
-            mesAnioV += fechaV.charAt(i);
-        }
-        for(int i = 8; i < 10; i++){
-            diaMesA += fechaActual.charAt(i);
-            diaMesV += fechaV.charAt(i);
-        }
-        int diaMesVe = Integer.parseInt(anioV);
-        boolean valor;
-        if(anioA.equals(anioV) && mesAnioA.equals(mesAnioV)){
-            if(diaMesA.equals(diaMesV))
-                return true;
-            if(diaMes > diaMesVe)
-                return true;
-        }
- 
-        return false; // por defecto ninguna fecha está vencida.
-    }
+   
     private void calculaFechaVencimiento(){
-        int arrayVencidas [] = {};
-        String vencidas = "";
-        for(int i = 0; i < cantidadFilas(); i++){
-            if (comparaFecha(i))
-                vencidas += "\n"+jtPasswords.getModel().getValueAt(i, 3);
-        }
-        this.clavesVencidasAtf.setText("Las siguientes claves están vencidas, renuévelas: \n"+vencidas);
+        CalculaVencimiento fechaVencimiento = new CalculaVencimiento();
+        String vencidas = fechaVencimiento.CalculaFechaVencimiento(cantidadFilas(), jtPasswords);
+        final String mensajeVencidas = "Las claves de los siguientes sitios están vencidas,\npor favor renuévelas: \n";
+        this.clavesVencidasAtf.setText(mensajeVencidas+vencidas);
         this.ClavesVencidas.setLocationRelativeTo(this);
         this.ClavesVencidas.setVisible(true);
     }
