@@ -141,7 +141,6 @@ public class AgregarUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_bntAgregarUsuariActionPerformed
 
     private void agregarUsuario() {
-        String contrasena = new String (jtContrasena.getPassword());
         if( !validaDatos() && coincidePasswords() ){
             String datosObtenidos = "'" + jtNombreUsuario.getText() + "'" + ","
                     + "'" + this.cifraPassword() + "'";

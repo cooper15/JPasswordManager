@@ -50,7 +50,6 @@ public class CalculaVencimiento {
             diaMesV += fechaV.charAt(i);
         }
         int diaMesVe = Integer.parseInt(diaMesV);
-        boolean valor;
         if(anioA.equals(anioV) && mesAnioA.equals(mesAnioV)){
             if(diaMesA.equals(diaMesV))
                 return true;
