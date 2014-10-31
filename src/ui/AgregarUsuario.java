@@ -165,18 +165,18 @@ public class AgregarUsuario extends javax.swing.JDialog {
     
     private boolean validaDatos(){
         boolean vacio = false;
-        String contrasena = new String ( jtContrasena.getPassword() );
-        String repitaContrasena = new String ( jtRepitaContrasena.getPassword() );
-        if ( contrasena.equals("") | jtNombreUsuario.getText().equals("") | repitaContrasena.equals("") )
+        String contrasena = new String (jtContrasena.getPassword());
+        String repitaContrasena = new String (jtRepitaContrasena.getPassword());
+        if (contrasena.equals("") | jtNombreUsuario.getText().equals("") | repitaContrasena.equals(""))
             return true;
         return vacio;
     }
     private boolean coincidePasswords(){
         boolean coincide = false;
-           String contrasena1 = new String ( jtContrasena.getPassword() );
-           String contrasena2 = new String ( jtRepitaContrasena.getPassword() );
+           String contrasena1 = new String (jtContrasena.getPassword());
+           String contrasena2 = new String (jtRepitaContrasena.getPassword());
            
-           if( contrasena1.equals(contrasena2) )
+           if(contrasena1.equals(contrasena2))
                coincide = true;
            else 
                return coincide;
