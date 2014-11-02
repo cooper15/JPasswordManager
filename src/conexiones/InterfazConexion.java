@@ -30,6 +30,7 @@ public class InterfazConexion {
             conexionDatos.getConexion().close();
         }
         catch(SQLException e){
+            e.getSQLState();
         } 
     }
     

@@ -55,6 +55,7 @@ public class CalculaVencimiento {
                 return true;
             if(diaMes > diaMesVe)
                 return true;
+            
         }
         return false; // por defecto ninguna fecha está vencida.
     }
