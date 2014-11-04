@@ -1,7 +1,13 @@
-JavaProj
+JPasswordManager
 ========
-Aplicación hecha para gestionar contraseñas, utiliza una conexión MySql, la idea es ver diferentes elementos de la conexión con ese gestor de base de datos.
+Aplicación cliente-servidor escrita en java y cuyo propósito es gestionar contraseñas.
+
+Requerimientos
+========
+JRE 1.7 o superior.
+MySql Server 5.6 o superior.
+
 
 Para contactos v.centeno15@gmail.com
 
-Repositorio para proyectos en java
+Simposio sede Guanacaste 14/11/2014
