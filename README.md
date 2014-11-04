@@ -4,8 +4,8 @@ Aplicación cliente-servidor escrita en java y cuyo propósito es gestionar cont
 
 Requerimientos
 ========
-JRE 1.7 o superior.
-MySql Server 5.6 o superior.
+1. JRE 1.7 o superior.
+2. MySql Server 5.6 o superior.
 
 
 Para contactos v.centeno15@gmail.com
