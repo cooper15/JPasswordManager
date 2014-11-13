@@ -1,11 +1,12 @@
 
 package ui;
 
+
 import conexiones.InterfazConexion;
 import cifrado.AccCifrado;
-import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import calendario.CalculaVencimiento;
 
 /**
  *
@@ -18,7 +19,9 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.clavesVencidasAtf.setEditable(false);
     }
 
     /**
@@ -33,6 +36,10 @@ public class Principal extends javax.swing.JFrame {
         menuContextual = new javax.swing.JPopupMenu();
         menuContextualEliminar = new javax.swing.JMenuItem();
         menu_contextual_ver_Pass = new javax.swing.JMenuItem();
+        ClavesVencidas = new javax.swing.JDialog();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        clavesVencidasAtf = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         bntNuevoPass = new javax.swing.JButton();
         bntVisualizarActualizar = new javax.swing.JButton();
@@ -40,11 +47,9 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtPasswords = new javax.swing.JTable();
         jpBarraDeEstado = new javax.swing.JPanel();
-        estado_lbl = new javax.swing.JLabel();
+        estadoLbl = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmArchivo = new javax.swing.JMenu();
-        jmiNuevoUsuario = new javax.swing.JMenuItem();
-        jmiEliminarUsuario = new javax.swing.JMenuItem();
         jmiSalir = new javax.swing.JMenuItem();
         jmEditar = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -71,6 +76,45 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         menuContextual.add(menu_contextual_ver_Pass);
+
+        ClavesVencidas.setTitle("Claves vencidas");
+        ClavesVencidas.setMinimumSize(new java.awt.Dimension(350, 230));
+        ClavesVencidas.setModal(true);
+        ClavesVencidas.setResizable(false);
+
+        clavesVencidasAtf.setColumns(20);
+        clavesVencidasAtf.setRows(5);
+        jScrollPane2.setViewportView(clavesVencidasAtf);
+
+        jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ClavesVencidasLayout = new javax.swing.GroupLayout(ClavesVencidas.getContentPane());
+        ClavesVencidas.getContentPane().setLayout(ClavesVencidasLayout);
+        ClavesVencidasLayout.setHorizontalGroup(
+            ClavesVencidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ClavesVencidasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(ClavesVencidasLayout.createSequentialGroup()
+                .addGap(134, 134, 134)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        ClavesVencidasLayout.setVerticalGroup(
+            ClavesVencidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ClavesVencidasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestor de contraseñas");
@@ -136,28 +180,15 @@ public class Principal extends javax.swing.JFrame {
         jpBarraDeEstadoLayout.setHorizontalGroup(
             jpBarraDeEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpBarraDeEstadoLayout.createSequentialGroup()
-                .addComponent(estado_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(estadoLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jpBarraDeEstadoLayout.setVerticalGroup(
             jpBarraDeEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(estado_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
+            .addComponent(estadoLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
         );
 
         jmArchivo.setText("Archivo");
-
-        jmiNuevoUsuario.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/GestorContraseña/img/contact-new.png")); // NOI18N
-        jmiNuevoUsuario.setText("Nuevo Usuario");
-        jmiNuevoUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiNuevoUsuarioActionPerformed(evt);
-            }
-        });
-        jmArchivo.add(jmiNuevoUsuario);
-
-        jmiEliminarUsuario.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/GestorContraseña/img/process-stop.png")); // NOI18N
-        jmiEliminarUsuario.setText("Eliminar Usuario");
-        jmArchivo.add(jmiEliminarUsuario);
 
         jmiSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         jmiSalir.setIcon(new javax.swing.ImageIcon("/home/cooper15/NetBeansProjects/GestorContraseña/img/window-close.png")); // NOI18N
@@ -229,77 +260,58 @@ public class Principal extends javax.swing.JFrame {
         dialogAgregar.setVisible(true);
     }//GEN-LAST:event_bntNuevoPassActionPerformed
 
-    private void jmiNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuevoUsuarioActionPerformed
-        AgregarUsuario dialogNewUsuario = new AgregarUsuario(this,true);
-        dialogNewUsuario.setVisible(true);
-    }//GEN-LAST:event_jmiNuevoUsuarioActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // Llenar la tabla con los datos resultantes del ResultSet...
-        jtPasswords.setComponentPopupMenu(menuContextual);
-        
-        refrescar_tabla();
+        jtPasswords.setComponentPopupMenu(menuContextual);     
+        refrescarTabla();
         tooltip();
-       
+        calculaFechaVencimiento();
     }//GEN-LAST:event_formWindowOpened
     private boolean celdaPresionada(){
         boolean presionada = false;
         int fila = jtPasswords.getSelectedRow();
-        int columna = jtPasswords.getSelectedColumn();
-            
+        int columna = jtPasswords.getSelectedColumn();  
         if (fila != -1 && columna != -1 )
             presionada = true;
-            
         return presionada;
     
     }
     
-    private void refrescar_tabla(){
+   
+    private void calculaFechaVencimiento(){
+        CalculaVencimiento fechaVencimiento = new CalculaVencimiento();
+        String vencidas = fechaVencimiento.CalculaFechaVencimiento(cantidadFilas(), jtPasswords);
+        final String mensajeVencidas = "Las claves de los siguientes sitios están vencidas,\npor favor renuévelas: \n";
+        this.clavesVencidasAtf.setText(mensajeVencidas+vencidas);
+        this.ClavesVencidas.setLocationRelativeTo(this);
+        this.ClavesVencidas.setVisible(true);
+    }
+    private void refrescarTabla(){
         DefaultTableModel modeloTabla = new DefaultTableModel();
         this.jtPasswords.setModel(modeloTabla);     
         InterfazConexion nuevaConexion = new InterfazConexion();
-        ResultSet resultado = nuevaConexion.ObtieneDatosPassword(nombreUsuario);
-       
-        String nombreColumnas [] = {"id", "Usuario", "Contraseña", 
-                                    "Nombre sitio", "URL sitio","Vencimiento"};
-        for (int i=0; i<=5; i++)
-            modeloTabla.addColumn(nombreColumnas[i]);
-       
-        try{
-             while(resultado.next()){
-                 Object[] fila = new Object[6];
-                 for (int i = 0; i < 6; i++) {
-                            fila[i]=resultado.getObject(i+1);
-                 }
-                 modeloTabla.addRow(fila);
-            }
-        }
-        catch(Exception e){
-        }
+        nuevaConexion.llenaTabla(modeloTabla, nombreUsuario);
         // Esconder el campo Id de la tabla password.
-       jtPasswords.getColumnModel().getColumn(0).setMaxWidth(0);
-       jtPasswords.getColumnModel().getColumn(0).setMinWidth(0);
-       jtPasswords.getColumnModel().getColumn(0).setPreferredWidth(0);
-       // Esconder el campo password 
-       jtPasswords.getColumnModel().getColumn(2).setMaxWidth(0);
-       jtPasswords.getColumnModel().getColumn(2).setMinWidth(0);
-       jtPasswords.getColumnModel().getColumn(2).setPreferredWidth(0);
+        jtPasswords.getColumnModel().getColumn(0).setMaxWidth(0);
+        jtPasswords.getColumnModel().getColumn(0).setMinWidth(0);
+        jtPasswords.getColumnModel().getColumn(0).setPreferredWidth(0);
+        // Esconder el campo password 
+        jtPasswords.getColumnModel().getColumn(2).setMaxWidth(0);
+        jtPasswords.getColumnModel().getColumn(2).setMinWidth(0);
+        jtPasswords.getColumnModel().getColumn(2).setPreferredWidth(0);
     }
     
     private void tooltip(){
-      bntNuevoPass.setToolTipText("Agregar");
-      bntVisualizarActualizar.setToolTipText("Editar");
-      refrescar_bnt.setToolTipText("Refrescar");
-      jtPasswords.setToolTipText("Seleccione una celda");
+        bntNuevoPass.setToolTipText("Agregar");
+        bntVisualizarActualizar.setToolTipText("Editar");
+        refrescar_bnt.setToolTipText("Refrescar");
+        jtPasswords.setToolTipText("Seleccione una celda");
     }
     
     private void bntVisualizarActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVisualizarActualizarActionPerformed
         int fila, columna;
         fila = jtPasswords.getSelectedRow();
-        //columna = jtPasswords.getSelectedColumn();
-       if (jtPasswords.isRowSelected(fila)){
+        if (jtPasswords.isRowSelected(fila)){
             EditarPass editar = new EditarPass(this,true);
-            
             editar.setNombreUsuario(nombreUsuario);
             editar.setId((int) jtPasswords.getModel().getValueAt(fila, 0));
             editar.setContrasenaUsuario(jtPasswords.getModel().getValueAt(fila, 2).toString());
@@ -307,9 +319,8 @@ public class Principal extends javax.swing.JFrame {
             editar.setUrlSitio(jtPasswords.getModel().getValueAt(fila, 4).toString());
             editar.setVisible(true);
         }
-       else 
-           JOptionPane.showMessageDialog(this, "No ha seleccionado ninguna fila");
-        
+        else 
+           JOptionPane.showMessageDialog(this, "No ha seleccionado ninguna fila"); 
     }//GEN-LAST:event_bntVisualizarActualizarActionPerformed
 
     private void menuContextualMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuContextualMousePressed
@@ -321,24 +332,28 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No selecionó ninguna celda");
         else{
             InterfazConexion inte_con = new InterfazConexion();
-            int fila = numero_fila();
+            int fila = numeroFila();
             String id = jtPasswords.getModel().getValueAt(fila, 0).toString();
             inte_con.eliminar_password(id);
-            estado_lbl.setText("Contraseña eliminada");
+            estadoLbl.setText("Contraseña eliminada");
         }       
     }//GEN-LAST:event_menuContextualEliminarMousePressed
 
-    private int numero_fila(){
-       return jtPasswords.getSelectedRow();
+    private int cantidadFilas(){
+        return jtPasswords.getModel().getRowCount();
+    }
+    
+    private int numeroFila(){
+        return jtPasswords.getSelectedRow();
     }
     private void refrescar_bntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refrescar_bntActionPerformed
-        refrescar_tabla();
-        estado_lbl.setText("");
+        refrescarTabla();
+        estadoLbl.setText("");
     }//GEN-LAST:event_refrescar_bntActionPerformed
 
     private void menu_contextual_ver_PassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_contextual_ver_PassActionPerformed
         if (celdaPresionada()){
-            int fila = numero_fila();
+            int fila = numeroFila();
             String pass_a_copiar = jtPasswords.getModel().getValueAt(fila, 2).toString();
             VerPassword ver_password = new VerPassword(this, true);
             AccCifrado descifrar = new AccCifrado();
@@ -359,6 +374,10 @@ public class Principal extends javax.swing.JFrame {
         GenerarPassword nuevoPassword = new GenerarPassword(this, true);
         nuevoPassword.setVisible(true);
     }//GEN-LAST:event_generarMnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.ClavesVencidas.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
     public void setNombreUsuario( String nombreUsuario){
         // Usuario logeado
         this.nombreUsuario = nombreUsuario;
@@ -397,18 +416,20 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog ClavesVencidas;
     private javax.swing.JButton bntNuevoPass;
     private javax.swing.JButton bntVisualizarActualizar;
-    private javax.swing.JLabel estado_lbl;
+    private javax.swing.JTextArea clavesVencidasAtf;
+    private javax.swing.JLabel estadoLbl;
     private javax.swing.JMenuItem generarMn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenu jmArchivo;
     private javax.swing.JMenu jmEditar;
-    private javax.swing.JMenuItem jmiEliminarUsuario;
-    private javax.swing.JMenuItem jmiNuevoUsuario;
     private javax.swing.JMenuItem jmiSalir;
     private javax.swing.JPanel jpBarraDeEstado;
     private javax.swing.JTable jtPasswords;

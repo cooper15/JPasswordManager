@@ -104,7 +104,7 @@ public class GenerarPassword extends javax.swing.JDialog {
     }//GEN-LAST:event_generarBtnActionPerformed
 
     private void passGenTxtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passGenTxtMousePressed
-       MenuContextual nuevoMenu = new MenuContextual();
+        MenuContextual nuevoMenu = new MenuContextual();
         passGenTxt.setComponentPopupMenu(nuevoMenu.menuContextual(passGenTxt));
     }//GEN-LAST:event_passGenTxtMousePressed
 

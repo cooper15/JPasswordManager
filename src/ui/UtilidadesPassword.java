@@ -136,8 +136,7 @@ public class UtilidadesPassword extends javax.swing.JDialog {
         else{
             barra_seguridad.setValue(5);
             segura_lbl.setText("Insegura");
-        }
-            
+        }      
     }//GEN-LAST:event_comprobar_btnActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
