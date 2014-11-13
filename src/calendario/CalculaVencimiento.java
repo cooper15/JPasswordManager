@@ -45,7 +45,7 @@ public class CalculaVencimiento {
             mesAnioA += fechaActual.charAt(i);
             mesAnioV += fechaV.charAt(i);
         }
-        for(int i = 8; i < 10; i++){
+        for(int i = 8; i <= 9; i++){
             diaMesA += fechaActual.charAt(i);
             diaMesV += fechaV.charAt(i);
         }
@@ -54,9 +54,12 @@ public class CalculaVencimiento {
             if(diaMesA.equals(diaMesV))
                 return true;
             if(diaMes > diaMesVe)
-                return true;
-            
+                return true;     
         }
+        else // Verifica si el mes actual es mayor que el mes de vencimiento
+            if(anioA.equals(anioV) && Integer.parseInt(mesAnioA) > Integer.parseInt(mesAnioV)){
+                    return true;
+            }
         return false; // por defecto ninguna fecha está vencida.
     }
     public String CalculaFechaVencimiento(int cantidadFilas, JTable jtPasswords){

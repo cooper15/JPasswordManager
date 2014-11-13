@@ -200,6 +200,7 @@ public class Login extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+       
         //</editor-fold>
 
         /* Create and display the dialog */
