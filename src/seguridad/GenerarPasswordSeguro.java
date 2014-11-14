@@ -21,7 +21,7 @@ import java.security.SecureRandom;
  * @author cooper15
  */
 public class GenerarPasswordSeguro {
-    String ALFABETO_MINUSCULA = "abcdefghijkmnlropqwvxyz";
+    String ALFABETO_MINUSCULA = "abcdefghijklmnopqrstuvwxyz";
     String ALFABETO_MAYUSCULA = ALFABETO_MINUSCULA.toUpperCase();
     String NUMEROS = "0123456789";
     public String generatePassword(int longitudPassword){
@@ -36,11 +36,11 @@ public class GenerarPasswordSeguro {
         do{
             switch(aleatorio.nextInt(3)){
                 case 0:
-                    passwordGenerando += ALFABETO_MINUSCULA.charAt(aleatorio.nextInt(23));
+                    passwordGenerando += ALFABETO_MINUSCULA.charAt(aleatorio.nextInt(26));
                     totalLetras ++;
                     break;
                 case 1:
-                    passwordGenerando += ALFABETO_MAYUSCULA.charAt(aleatorio.nextInt(23));
+                    passwordGenerando += ALFABETO_MAYUSCULA.charAt(aleatorio.nextInt(26));
                     totalLetras ++;
                     break;
                 case 2:

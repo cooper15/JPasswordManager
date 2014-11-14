@@ -195,26 +195,27 @@ public class EditarPass extends javax.swing.JDialog {
         String contrasena = new String ( txtContrasena.getPassword() );
         final String msjDatosVacios = "Existen datos vacíos, por favor rellene el formulario completo";
         if ( !validaDatos()  ){
-            // llama codigo para insersión..
-            String diaMes =
-                    Integer.toString(fechaDch.getCurrent().get(Calendar.DAY_OF_MONTH));
-            String mes =
-                    Integer.toString(fechaDch.getCurrent().get(Calendar.MONTH) + 1);
-            String anio =
-                    Integer.toString(fechaDch.getCurrent().get(Calendar.YEAR));
-            String fecha = diaMes+"/"+mes+"/"+anio;
-            
-            JOptionPane.showMessageDialog(null,fecha);
+            String fecha = obtieneFechaActual();
             String datos = "'"+nombreUsuario+"'"+","+"'"+contrasena+"'"+","
                     +"'"+txtNombreSitio.getText()+"'"+","+"'"
-                    +txtUrlSitio.getText()+"'";
-            JOptionPane.showMessageDialog(null,datos);
+                    +txtUrlSitio.getText()+"'"+","+fecha;
             InterfazConexion nuevaConexion = new InterfazConexion();
             nuevaConexion.actualizaPassword(id, datos);
             this.dispose();
         }
         else
             JOptionPane.showMessageDialog(this, msjDatosVacios,"Atención",JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private String obtieneFechaActual() {
+        final int obtieneDia = fechaDch.getCurrent().get(Calendar.DAY_OF_MONTH);
+        final int obtieneAnio = fechaDch.getCurrent().get(Calendar.YEAR);
+        final int obtieneMes = fechaDch.getCurrent().get(Calendar.MONTH ) +1;
+        String diaMes =Integer.toString(obtieneDia);
+        String mes =Integer.toString(obtieneMes);
+        String anio =Integer.toString(obtieneAnio);
+        String fecha = "'"+anio+"-"+mes+"-"+diaMes+"'";
+        return fecha;
     }
 
     private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
